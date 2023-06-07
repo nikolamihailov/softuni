@@ -9,7 +9,7 @@ function solve() {
 
     function addTask(e) {
         e.preventDefault();
-        if (task.value === "" || description.value === "" || date.value === "") return;
+        if (task.value.trim() === "" || description.value.trim() === "" || date.value.trim() === "") return;
         const div = openS.querySelector("div:nth-child(2)");
         const article = document.createElement("article");
         const h3 = document.createElement("h3");
