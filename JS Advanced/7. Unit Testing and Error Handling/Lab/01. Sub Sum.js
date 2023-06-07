@@ -1,8 +1,7 @@
 function subSum(arr, startIdx, endIdx) {
+    if (!Array.isArray(arr)) return NaN;
     if (startIdx < 0) startIdx = 0;
     if (endIdx >= arr.length) endIdx = arr.length - 1;
-    if (!Array.isArray(arr)) return NaN;
-
     let sum = 0;
     for (let i = startIdx; i <= endIdx; i++) {
         sum += Number(arr[i]);
