@@ -12,7 +12,7 @@ class Circle {
         return Math.PI * (this.radius ** 2);
     }
 }
-let c = new Circle(2);
+const c = new Circle(2);
 c.diameter = 1.6;
 console.log(`Radius: ${c.radius}`); // 0.8
 console.log(`Diameter: ${c.diameter}`); // 1.6
