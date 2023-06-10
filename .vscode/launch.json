@@ -26,10 +26,7 @@
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "skipFiles": [
-                "<node_internals>/**"
-            ],
-            "program": "${workspaceFolder}\\JS Advanced\\7. Unit Testing and Error Handling\\Lab\\tests\\04. Sum of numbers.test.js"
+            "program": "${file}"
         }
     ]
 }
