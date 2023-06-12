@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Contacts Builder</title>
+</head>
+
+<body>
+    <div id="main">
+
+    </div>
+</body>
+<script>
+    class Contact {
+        constructor(firstName, lastName, phone, email) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+            this.phone = phone;
+            this.email = email;
+            this._online = false;
+        }
+
+        get online() {
+            return this._online;
+        }
+
+        set online(value) {
+            this._online = value;
+            if (this.divTitle) {
+                this.divTitle.classList = this.online ? 'title online' : 'title';
+            }
+        }
+
+        render(id) {
+            const parent = document.getElementById(id);
+            const article = document.createElement("article");
+            this.divTitle = document.createElement("div");
+            this.divTitle.classList.add("title");
+            this.divTitle.innerHTML = `${this.firstName} ${this.lastName}<button>&#8505;</button>`;
+            const btn = this.divTitle.querySelector("button");
+            btn.addEventListener("click", () => {
+                if (divInfo.style.display === "none") {
+                    divInfo.style.display = "block";
+                } else {
+                    divInfo.style.display = "none";
+                }
+            });
+            const divInfo = document.createElement("div");
+
+            if (this._online) {
+                this.divTitle.classList.add('online');
+            } else {
+                this.divTitle.classList.remove('online');
+            }
+            divInfo.classList.add("info");
+            divInfo.style.display = "none";
+            divInfo.innerHTML = `<span>&phone; ${this.phone}</span>
+                                  <span>&#9993; ${this.email}</span>`;
+
+            article.appendChild(this.divTitle);
+            article.appendChild(divInfo);
+            parent.appendChild(article);
+        }
+    }
+    let contacts = [
+        new Contact("Ivan", "Ivanov", "0888 123 456", "i.ivanov@gmail.com"),
+        new Contact("Maria", "Petrova", "0899 987 654", "mar4eto@abv.bg"),
+        new Contact("Jordan", "Kirov", "0988 456 789", "jordk@gmail.com")
+    ];
+    contacts.forEach(c => c.render('main'));
+    setTimeout(() => contacts[1].online = true, 2000);
+</script>
+
+</html>
