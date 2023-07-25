@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "chai": "^4.3.7",
+    "lit-html": "^2.7.5",
     "mocha": "^10.2.0"
   },
   "devDependencies": {
