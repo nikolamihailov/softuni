@@ -1,10 +1,16 @@
 const port = 5000;
 const express = require("express");
 const path = require("path");
+const handlebars = require("express-handlebars");
 
 // creates an instance of the Express application, which you can use
 // to define routes and handle incoming requests
 const app = express();
+
+// Add handlebars to express
+// register view engine with file extension name in the quotes
+app.engine("handlebars", handlebars.engine());
+app.set("view engine", "handlebars");
 
 // Add third party middleware
 // check if the request has some post data and adds them to req.body
