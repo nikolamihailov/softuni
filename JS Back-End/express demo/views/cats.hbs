@@ -1,0 +1,16 @@
+{{#if cats}}
+  {{#each cats}}
+  {{!-- using the partial template --}}
+  {{>cat}}
+  {{/each}}
+{{else}}
+  <strong>There are no cats</strong>
+{{/if}}
+
+<form method="post">
+  <label for="name">Name</label>
+  <input type="text" id="name" name="name" />
+  <label for="age">Age</label>
+  <input type="number" id="age" name="age" />
+  <input type="submit" value="add cat" />
+</form>

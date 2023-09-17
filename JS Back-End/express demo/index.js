@@ -1,16 +1,19 @@
 const port = 5000;
 const express = require("express");
-const path = require("path");
 const handlebars = require("express-handlebars");
+const path = require("path");
 
+const { addCat, getAllCats } = require("./cats-db");
 // creates an instance of the Express application, which you can use
 // to define routes and handle incoming requests
 const app = express();
 
 // Add handlebars to express
-// register view engine with file extension name in the quotes
-app.engine("handlebars", handlebars.engine());
-app.set("view engine", "handlebars");
+// register view engine with  custom file extension name 
+app.engine("hbs", handlebars.engine({
+    extname: "hbs"
+}));
+app.set("view engine", "hbs");
 
 // Add third party middleware
 // check if the request has some post data and adds them to req.body
@@ -58,36 +61,28 @@ app.use("/specific", (req, res, next) => {
 // app/server.METHOD(PATH, HANDLER)
 // get requests
 app.get("/", (req, res) => {
-    res.send("Hello from express.js");
+    // makes the view engine answer the request in the folder views
+    res.render("home");
+    // first arguments is the name of the template to be used, the second is obj with options
+    // res.render("home", {name: "k"})
 });
 
+app.get("/about", (req, res) => {
+    res.render("about");
+});
+
+
 app.get("/cats", (req, res) => {
-    res.send(`
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="/css/styles.css">
-            <title>Document</title>
-        </head>
-        <body>
-                <form method="post">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name">
-            <label for="age">Age</label>
-            <input type="number" id="age" name="age">
-            <input type="submit" value="add cat">
-            </form>
-        </body>
-        </html>
-    `);
+    const cats = getAllCats();
+    // const firstCat = cats[0];
+    res.render("cats", { cats });
 });
 
 // post, put, delete requests
 app.post("/cats", (req, res) => {
-    console.log(req.body);
-    res.status(201).send("Cat has been created!");
+    addCat(req.body.name, Number(req.body.age));
+    //res.status(201).send("Cat has been created!");
+    res.redirect("/cats");
 });
 app.put("/cats", (req, res) => { });
 app.delete("/cats", (req, res) => { });
