@@ -1,0 +1,29 @@
+<header>
+  <nav>
+    <ul class="navigation">
+      <li><a href="/">Home Page</a></li>
+      <li><a href="/cats/add-breed">Add Breed</a></li>
+      <li><a href="/cats/add-cat">Add Cat</a></li>
+    </ul>
+  </nav>
+  <h1>Cat Shelter</h1>
+  <form method="POST">
+    <input type="text" name="search" />
+    <button type="submit">Search</button>
+    {{!-- <input type="submit" value="Search" style="background:rgb(25, 164, 234); color: white; border: none; height: 30px; padding: 5px;cursor:pointer;border-radius:15px"> --}}
+  </form>
+</header>
+<main>
+  <section class="cats">
+    <ul>
+      {{#if allCats}}
+        {{#each allCats}}
+          {{! using the partial template }}
+            {{>cat}}
+        {{/each}}
+      {{else}}
+        <strong>There are no cats</strong>
+      {{/if}}
+    </ul>
+  </section>
+</main>

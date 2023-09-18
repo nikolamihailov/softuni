@@ -1,0 +1,30 @@
+
+    <header>
+        <nav>
+            <ul class="navigation">
+                <li><a href="">Home Page</a></li>
+                <li><a href="">Add Breed</a></li>
+                <li><a href="">Add Cat</a></li>
+            </ul>
+        </nav>
+        <h1>Cat Shelter</h1>
+    </header>
+    <main>
+        <form  method="POST" class="cat-form">
+            <h2>Shelter the cat</h2>
+            <img src="/images/{{image}}" alt="">
+            <label for="name">Name</label>
+            <input type="text" id="name" value="{{name}}" disabled>
+            <label for="description">Description</label>
+            <textarea id="description" disabled>{{description}}</textarea>
+            <label for="group">Breed</label>
+            <select id="group" disabled>
+                <option value="{{breed}}">{{breed}}</option>
+            </select>
+            <input type="submit" value="Shelter the cat" style="background:rgb(25, 164, 234); color: white; border: none; width: 100%; padding:15px 25px; cursor:pointer">
+        </form>
+    </main>
+</body>
+
+
+</html>

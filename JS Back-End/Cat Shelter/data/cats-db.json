@@ -1,0 +1,16 @@
+[
+  {
+    "id": "puho5puho5puho5",
+    "name": "Puhcho",
+    "description": "cool cat",
+    "image": "cat1.jpg",
+    "breed": "Bombay Cat"
+  },
+  {
+    "id": "koak5koak5koak5",
+    "name": "Kotak",
+    "description": "cool cat 2",
+    "image": "cat2.jpg",
+    "breed": "British"
+  }
+]
