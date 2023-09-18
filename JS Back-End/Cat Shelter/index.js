@@ -1,6 +1,6 @@
 const allCats = require("./data/cats-db.json");
 const allBreeds = require("./data/breeds-db.json");
-const { PORT, search } = require("./config.js");
+const PORT = require("./config.js");
 const fs = require("fs");
 const express = require("express");
 const handlebars = require("express-handlebars");
