@@ -122,6 +122,10 @@ app.post("/newhome/:catId", (req, res) => {
     res.redirect("/");
 });
 
+app.get("*", (req, res) => {
+    res.render("404");
+});
+
 
 
 
