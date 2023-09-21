@@ -4,10 +4,11 @@ const mongoose = require("mongoose");
 // the schema descibes how the cat collection should look like
 const catSchema = new mongoose.Schema({
     // making field required and creating allowed length
+    // adding custom validation message
     name: {
         type: String,
-        required: true,
-        minLength: 3,
+        required: [true, "Name is required"],
+        minLength: [3, "Minimum length is 3"],
         maxLength: 15
     },
     age: Number,

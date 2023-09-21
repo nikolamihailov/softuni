@@ -108,8 +108,16 @@ const connectDb = async function () {
     // console.log(cats);
 
     // second way - mongoose way
-    const cats = await Cat.find().where("name").ne("cat3");
-    console.log(cats);
+    /*  const cats = await Cat.find().where("name").ne("cat3");
+     console.log(cats); */
+
+    // testing validation
+    const newCat = await Cat.create({
+        name: "bo",
+        age: 14,
+        breed: "nqma"
+    });
+
 
     const res = await Cat.getAll();
     console.log(res);
