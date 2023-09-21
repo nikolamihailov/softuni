@@ -11,6 +11,14 @@ const catSchema = new mongoose.Schema({
         minLength: [3, "Minimum length is 3"],
         maxLength: 15
     },
+    color: {
+        type: String,
+        required: true,
+        enum: {
+            values: ["white", "black"],
+            message: "wrong color"
+        }
+    },
     age: Number,
     breed: String
 });

@@ -113,7 +113,8 @@ const connectDb = async function () {
 
     // testing validation
     const newCat = await Cat.create({
-        name: "bo",
+        name: "bob",
+        color: "red",
         age: 14,
         breed: "nqma"
     });
