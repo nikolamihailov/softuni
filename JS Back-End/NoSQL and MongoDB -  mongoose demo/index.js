@@ -8,6 +8,14 @@ const Person = require("./models/Person");
 // connecting to the DBMS - the database we want to work with
 const connectDb = async function () {
     await mongoose.connect("mongodb://127.0.0.1:27017/cats-db");
+
+    // if we write name of non-existing db and add a cat, new db will be created
+    // await mongoose.connect("mongodb://127.0.0.1:27017/cats-db-second-version");
+    /*   await Cat.create({
+          name: "new db cat",
+          age: 1444444,
+          breed: "yupi"
+      }); */
     // conection established
     console.log("Db connected successfuly");
 
@@ -23,6 +31,7 @@ const connectDb = async function () {
     //  console.log(res);
 
     // READ
+
     // find all cats trrough the cat model from the db
     // returns a promise
     // const cats = await Cat.find();
