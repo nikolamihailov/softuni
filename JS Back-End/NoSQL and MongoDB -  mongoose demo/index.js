@@ -1,8 +1,9 @@
 const mongoose = require("mongoose");
 
-// importing the model
+// importing the models
 
 const Cat = require("./models/Cat");
+const Person = require("./models/Person");
 
 // connecting to the DBMS - the database we want to work with
 const connectDb = async function () {
@@ -84,6 +85,12 @@ const connectDb = async function () {
     // second way
     // await Cat.findByIdAndDelete("650c4c3b36e1c4969b7bcc15");
 
+    // adding new collection to the database that will be calles the plural of person - people
+    // the collection uses the rules defined by the mdoel
+    await Person.create({
+        name: "koleto",
+        age: 22
+    });
     const res = await Cat.getAll();
     console.log(res);
 
