@@ -10,25 +10,82 @@ const connectDb = async function () {
     // conection established
     console.log("Db connected successfuly");
 
-    // find all cats trrough the cat model from the db
-    // returns a promise
-    const cats = await Cat.find();
-    // console.log(cats);
-
     // instance method
     // cats.forEach(c => c.greet());
 
     // virtual property
     // cats.forEach(c => console.log(c.info));
 
-    // find cats based on criteria
-    const whiteCats = await Cat.find({ breed: "white" });
-    // console.log(whiteCats);
 
     // using static model method
+    // const res = await Cat.getAll();
+    //  console.log(res);
+
+    // READ
+    // find all cats trrough the cat model from the db
+    // returns a promise
+    // const cats = await Cat.find();
+
+    // find cats based on criteria
+    // returns array
+    // const whiteCats = await Cat.find({ breed: "white" });
+
+    // find the first cat based on criteria
+    // returns an object
+    // const cat = await Cat.findOne({ breed: "white" });
+
+    // find cat by id 
+    // returns an object
+    // const cat = await Cat.findById("650c4e9036e1c4969b7bcc16");
+
+    /////////////////////////// 
+    // CREATE
+
+    // create new instance from the model Cat
+    /*  const newCat = new Cat({
+         name: "cat 4",
+         age: 10,
+         breed: "ulichna"
+     });
+     // not added until we add it with .save()
+     await newCat.save();
+     console.log(newCat); */
+
+    // second way
+    /* const newCat = await Cat.create({
+        name: "bob",
+        age: 14,
+        breed: "nqma"
+    }); */
+    // console.log(newCat)
+
+    //////////////////////// 
+    // UPDATE
+
+    // finds the object by criteria
+    // const bob = await Cat.findOne({ name: "bob" });
+    // updates the property
+    // bob.age = 1;
+    // saves it in the db
+    // await bob.save();
+
+    // second method with native mongodb
+    // await Cat.updateOne({ name: "bob" }, { $set: { age: 20 } });
+
+    // third way with mongoose way
+    //await Cat.findByIdAndUpdate("650c9e4443596241be70df1f", { $set: { age: 100 } });
+
+    //////////////////////// 
+    // DELETE
+
+    // first way 
+    // await Cat.deleteOne({ name: "bob" });
+
+    // second way
+    // await Cat.findByIdAndDelete("650c4c3b36e1c4969b7bcc15");
+
     const res = await Cat.getAll();
     console.log(res);
-
 
 };
 connectDb();
