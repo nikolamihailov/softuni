@@ -87,10 +87,16 @@ const connectDb = async function () {
 
     // adding new collection to the database that will be calles the plural of person - people
     // the collection uses the rules defined by the mdoel
-    await Person.create({
+    /* await Person.create({
         name: "koleto",
         age: 22
-    });
+    }); */
+
+    // find all cats using selecting operators 
+    // not equal operator - $ne
+    // const cats = await Cat.find({ name: { $ne: "cat3" } });
+    // console.log(cats);
+
     const res = await Cat.getAll();
     console.log(res);
 
