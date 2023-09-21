@@ -1,0 +1,16 @@
+{
+  "name": "nosql-and-mongodb---mongoose-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^7.5.2",
+    "nodemon": "^3.0.1"
+  }
+}
