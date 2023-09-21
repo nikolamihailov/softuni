@@ -92,10 +92,15 @@ const connectDb = async function () {
         age: 22
     }); */
 
+    // native mongodb way
     // find all cats using selecting operators 
     // not equal operator - $ne
     // const cats = await Cat.find({ name: { $ne: "cat3" } });
     // console.log(cats);
+
+    // second way - mongoose way
+    const cats = await Cat.find().where("name").ne("cat3");
+    console.log(cats);
 
     const res = await Cat.getAll();
     console.log(res);
