@@ -7,15 +7,15 @@ router.get("/create", (req, res) => {
     res.render("create");
 });
 
-router.get("/:cubeId/details", (req, res) => {
-    const cube = cubeService.getCubeById(req.params.cubeId);
+router.get("/:cubeId/details", async (req, res) => {
+    const cube = await cubeService.getCubeById(req.params.cubeId);
     if (!cube) return res.redirect("/404-page-not-found");
     res.render("details", { cube });
 });
 
-router.post("/create", (req, res) => {
+router.post("/create", async (req, res) => {
     const { name, description, imageUrl, difficultyLevel } = req.body;
-    cubeService.create({ name, description, imageUrl, difficultyLevel: +difficultyLevel });
+    await cubeService.create({ name, description, imageUrl, difficultyLevel: +difficultyLevel });
     res.redirect("/");
 });
 module.exports = router;

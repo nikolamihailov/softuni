@@ -1,23 +1,9 @@
-const uniqId = require("uniqid");
-const cubes = [
-    {
-        id: 'm9ngfp189olmqru16z',
-        name: "Classic cube",
-        description: 'dran dran',
-        imageUrl: "https://images.pexels.com/photos/19677/pexels-photo.jpg?cs=srgb&dl=pexels-miguel-%C3%A1-padri%C3%B1%C3%A1n-19677.jpg&fm=jpg",
-        difficultyLevel: 2,
-    },
-    {
-        id: 'm8ngfp189olmqru16z',
-        name: "cube 2",
-        description: 'dran dran dran',
-        imageUrl: "https://images.pexels.com/photos/19677/pexels-photo.jpg?cs=srgb&dl=pexels-miguel-%C3%A1-padri%C3%B1%C3%A1n-19677.jpg&fm=jpg",
-        difficultyLevel: 1,
-    }
-];
+const Cube = require("../models/Cube");
 
-exports.getAllCubes = (search, from, to) => {
-    let result = [...cubes];
+// .lean() converts the mongoose documents to js objects
+exports.getAllCubes = async (search, from, to) => {
+    let result = await Cube.find().lean();
+
     if (search) {
         result = result.filter(cube => cube.name.toLocaleLowerCase().includes(search.toLowerCase()));
     }
@@ -30,17 +16,12 @@ exports.getAllCubes = (search, from, to) => {
     return result;
 };
 
-exports.getCubeById = (id) => {
-    const cube = cubes.find(cube => cube.id === id);
-    return cube;
-};
+exports.getCubeById = (id) => Cube.findById(id).lean();
 
-exports.create = (cubeData) => {
-    const newCube = {
-        id: uniqId(),
+exports.create = async (cubeData) => {
+    const newCube = await Cube.create({
         ...cubeData
-    };
-    cubes.push(newCube);
+    });
 
     return newCube;
 };
