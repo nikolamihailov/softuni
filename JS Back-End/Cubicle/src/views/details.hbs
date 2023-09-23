@@ -6,33 +6,18 @@
     <p><span>Difficulty level:</span>
       {{cube.difficultyLevel}}</p>
     <a class="btn" href="/">Back</a>
+    <a class="btn" href="/cubes/{{cube._id}}/attach-accessory">Attach accessory</a>
   </div>
-  <h2>Accessories</h2>
-  <div class="accessories">
-    <div class="accessory">
-      <img
-        src="https://images-na.ssl-images-amazon.com/images/I/61J8UP8pySL._SX425_.jpg"
-        alt="stickerName"
-      />
-      <h3>Accessory Name</h3>
-      <p>Accessory Description</p>
-    </div>
-    <div class="accessory">
-      <img
-        src="https://images-na.ssl-images-amazon.com/images/I/61J8UP8pySL._SX425_.jpg"
-        alt="stickerName"
-      />
-      <h3>Accessory Name</h3>
-      <p>Accessory Description</p>
-    </div>
-    <div class="accessory">
-      <img
-        src="https://images-na.ssl-images-amazon.com/images/I/61J8UP8pySL._SX425_.jpg"
-        alt="stickerName"
-      />
-      <h3>Accessory Name</h3>
-      <p>Accessory Description</p>
-    </div>
+
+  {{#if accessories}}
+      <h2>Accessories</h2>
+      <div class="accessories">
+        {{#each accessories}}
+          {{>accessory}}
+        {{/each}}
+      </div>
+  {{else}}
     <h3 class="italic">This cube has no accessories yet...</h3>
-  </div>
+  {{/if}}
+  
 </main>
