@@ -8,7 +8,7 @@
                 <label for="accessory">Accessories</label>    
                 <select id="accessory" name="accessory" />
                     {{#each accessories}}
-                        <option value="{{name}}">{{name}}</option>
+                        <option value="{{_id}}">{{name}}</option>
                     {{/each}}
                 </select>
                 <input type="submit" value="Attach">
