@@ -4,7 +4,7 @@ const cubeService = require("../services/cubeService");
 // path /cubes/create
 router.get("/create", (req, res) => {
     // console.log(cubeService.getAllCubes());
-    res.render("create");
+    res.render("cube/create");
 });
 
 router.get("/:cubeId/details", async (req, res) => {
