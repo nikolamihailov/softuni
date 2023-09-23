@@ -5,13 +5,15 @@ exports.getAllCubes = async (search, from, to) => {
     let result = await Cube.find().lean();
 
     if (search) {
-        result = result.filter(cube => cube.name.toLocaleLowerCase().includes(search.toLowerCase()));
+        const regex = new RegExp(search, 'i');
+        result = await Cube.find({ name: { $regex: regex } }).lean();
+        console.log(result);
     }
     if (from) {
-        result = result.filter(cube => cube.difficultyLevel >= +from);
+        result = await result.filter(cube => cube.difficultyLevel >= +from);
     }
     if (to) {
-        result = result.filter(cube => cube.difficultyLevel <= +to);
+        result = await result.filter(cube => cube.difficultyLevel <= +to);
     }
     return result;
 };

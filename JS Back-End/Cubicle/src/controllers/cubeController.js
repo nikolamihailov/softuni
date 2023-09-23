@@ -23,7 +23,7 @@ router.post("/create", async (req, res) => {
 
 router.get("/:cubeId/attach-accessory", async (req, res) => {
     const cube = await cubeService.getCubeById(req.params.cubeId);
-    const accessories = await accessoryService.getAllAccessories();
+    const accessories = await accessoryService.getAvailableAccessories(cube.accessories);
     const hasAccessories = accessories.length > 0;
     res.render("accessory/attach", { cube, accessories, hasAccessories });
 });
