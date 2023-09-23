@@ -11,7 +11,7 @@ router.get("/create", (req, res) => {
 router.get("/:cubeId/details", async (req, res) => {
     const cube = await cubeService.getCubeById(req.params.cubeId);
     if (!cube) return res.redirect("/404-page-not-found");
-    res.render("details", { cube });
+    res.render("cube/details", { cube });
 });
 
 router.post("/create", async (req, res) => {
