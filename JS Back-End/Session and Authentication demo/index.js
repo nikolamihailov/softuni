@@ -8,7 +8,7 @@ const PORT = 5050;
 app.use(cookieParser());
 
 app.get("/", (req, res) => {
-    let id = uuid();
+    let id;
 
     // get the cookie userId from all the cookies
     const userId = req.cookies["userId"];
@@ -16,8 +16,9 @@ app.get("/", (req, res) => {
     if (userId) {
         id = userId;
     } else {
+        id = uuid();
         // set the cookie
-        res.cookie("userId", id);
+        res.cookie("userId", id, { httpOnly: true });
     }
 
     res.send(`Hello user - ${id}`);
