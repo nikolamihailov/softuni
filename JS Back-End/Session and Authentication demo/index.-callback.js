@@ -1,7 +1,7 @@
 const express = require("express");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
-const jwt = require("./lib/jwt-custom");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 const secret = "alabala";
@@ -61,36 +61,31 @@ app.post("/login", async (req, res) => {
     const isValid = await bcrypt.compare(password, hash);
 
     if (isValid) {
-        try {
-            const payload = { username };
-            const token = await jwt.sign(payload, secret, { expiresIn: "2d" });
+        const payload = { username };
+        jwt.sign(payload, sectret, { expiresIn: "2d" }, (err, token) => {
+            if (err) return res.redirect("/404");
+
             res.cookie("token", token);
             res.redirect("/profile");
-
-        } catch (error) {
-            console.log(error);
-            res.redirect("/404");
-        }
+        });
     }
-    else return res.send("Unauthorized");
+    else res.send("Unauthorized");
 });
 
-app.get("/profile", async (req, res) => {
+app.get("/profile", (req, res) => {
 
     // get token from cookie
     const token = req.cookies["token"];
+    console.log(token);
     // verify token
     if (token) {
-        try {
-            const payload = await jwt.verify(token, secret);
+        jwt.verify(token, secret, (err, payload) => {
+            if (err) return res.status(401).send("Unathorized");
             res.send(`profile: ${payload.username}`);
-        } catch (error) {
-            res.status(401).send("Unathorized");
-        };
-    } else {
-        res.redirect("/login");
-    }
+        });
+    };
 
+    res.redirect("/login");
 });
 
 
