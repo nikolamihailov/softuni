@@ -6,5 +6,5 @@ This repository is for tracking my progress of the modules that I am attempting.
  - JS Advanced
  - JS Applications
 
-Currently doing:
+Courses that I am currently doing:
 - JS Back-end
