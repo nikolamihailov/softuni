@@ -12,7 +12,8 @@ router.get("/:cubeId/details", async (req, res) => {
     const cube = await cubeService.getCubeById(req.params.cubeId);
     const accessories = cube.accessories;
     if (!cube) return res.redirect("/404-page-not-found");
-    res.render("cube/details", { cube, accessories });
+    const isOwner = req.user._id === cube.owner?.toString();
+    res.render("cube/details", { cube, accessories, isOwner });
 });
 
 router.post("/create", async (req, res) => {
