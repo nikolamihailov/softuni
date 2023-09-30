@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const cookieParser = require("cookie-parser");
 
 function expressConfig(app) {
     // express static config
@@ -8,6 +9,7 @@ function expressConfig(app) {
     // parses all data send from form to obj
     // works with query strings also
     app.use(express.urlencoded({ extended: false }));
+    app.use(cookieParser());
 }
 
 module.exports = expressConfig;

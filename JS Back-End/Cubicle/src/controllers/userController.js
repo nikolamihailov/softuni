@@ -8,6 +8,7 @@ router.get("/login", (req, res) => {
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     const user = await userService.login(username, password);
+    res.cookie("user", user.username);
     if (user) return res.redirect("/");
     else return res.redirect("/users/login");
 });
