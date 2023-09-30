@@ -10,7 +10,9 @@
         <input type="text" id="image" name="imageUrl" value="{{cube.imageUrl}}" disabled="true" />
         <label for="difficulty">Difficulty</label>
         <select id="difficulty" name="difficultyLevel" value="" disabled="true" />
-        <option value="">1 - Very Easy</option>
+        {{#each options}}
+             <option value="{{value}}" {{#if selected}}selected {{/if}}>{{title}}</option>
+           {{/each}}
         </select>
         <input type="submit" value="Delete">
         </form>
