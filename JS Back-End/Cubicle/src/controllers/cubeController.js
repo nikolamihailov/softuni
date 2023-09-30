@@ -46,4 +46,15 @@ router.post("/:cubeId/delete", async (req, res) => {
     res.redirect("/");
 });
 
+router.get("/:cubeId/edit", async (req, res) => {
+    const cube = await cubeService.getCubeById(req.params.cubeId);
+    res.render("cube/edit", { cube });
+});
+
+router.post("/:cubeId/edit", async (req, res) => {
+    const cubeData = req.body;
+    await cubeService.updateCube(req.params.cubeId, cubeData);
+    res.redirect(`/cubes/${req.params.cubeId}/details`);
+});
+
 module.exports = router;
