@@ -9,6 +9,7 @@ exports.auth = async (req, res, next) => {
         try {
             const user = await jwt.verify(token, SECRET);
             req.user = user;
+            res.locals.isAuthenticated = true;
             next();
         } catch (error) {
             res.clearCookie("auth");
@@ -17,4 +18,9 @@ exports.auth = async (req, res, next) => {
     } else {
         next();
     }
+};
+
+exports.isAuth = (req, res, next) => {
+    if (!req.user) return res.redirect("/users/login");
+    next();
 };

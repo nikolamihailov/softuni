@@ -13,6 +13,11 @@ router.get("/about", (req, res) => {
     res.render("about");
 });
 
+router.get("/logout", (req, res) => {
+    res.clearCookie("auth");
+    res.redirect("/");
+});
+
 router.get("/404-page-not-found", (req, res) => {
     res.render("404");
 });
