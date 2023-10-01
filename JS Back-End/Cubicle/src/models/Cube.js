@@ -5,12 +5,13 @@ const cubeSchema = mongoose.Schema({
         type: String,
         required: [true, "Cube name is required!"],
         minLength: [5, "Cube name must be at least 5 chars!"],
-        match: [/^[A-Za-z0-9 ]$/, "Cube name must be alphanumeric!"]
+        match: [/^[A-Za-z0-9 ]+$/, "Cube name must be alphanumeric!"]
     },
     description: {
         type: String,
+        required: [true, "Cube description is required!"],
         minLength: [20, "Cube description must be at least 20 chars!"],
-        match: [/^[A-Za-z0-9 ]$/, "Cube description must be alphanumeric!"]
+        match: [/^[A-Za-z0-9 ]+$/, "Cube description must be alphanumeric!"]
     },
     imageUrl: {
         type: String,
