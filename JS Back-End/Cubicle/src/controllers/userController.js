@@ -8,10 +8,15 @@ router.get("/login", (req, res) => {
 
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
-    const token = await userService.login(username, password);
-    res.cookie("auth", token, { httpOnly: true });
+    try {
+        const token = await userService.login(username, password);
+        res.cookie("auth", token, { httpOnly: true });
+        res.redirect("/");
+    } catch (error) {
+        const errors = extractErrorMessages(error);
+        res.status(400).render("user/login", { errors });
+    }
 
-    res.redirect("/");
 });
 
 router.get("/register", (req, res) => {
@@ -24,15 +29,10 @@ router.post("/register", async (req, res) => {
     try {
         await userService.register({ username, password, repeatPassword });
         res.redirect("/users/login");
-
     } catch (error) {
         const errors = extractErrorMessages(error);
         res.status(400).render("user/register", { errors });
     }
-});
-
-router.get("/logout", (req, res) => {
-    res.render("index");
 });
 
 module.exports = router;
