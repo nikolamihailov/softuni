@@ -4,10 +4,17 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        unique: [true, "Username already exists!"],
+        unique: true,
         required: [true, "Username field is required!"],
         minLength: [5, "Username length must be at least 5 chars!"],
-        match: [/^[A-Za-z0-9]+$/, "Username must consist of only english letters and digits!"]
+        match: [/^[A-Za-z0-9]+$/, "Username must consist of only english letters and digits!"],
+        validate: {
+            validator: async function (username) {
+                const user = await User.findOne({ username });
+                return !user;
+            },
+            message: 'Username already exists',
+        },
     },
     password: {
         type: String,
