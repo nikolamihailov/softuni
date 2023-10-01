@@ -9,6 +9,7 @@ const accessorySchema = mongoose.Schema({
     },
     description: {
         type: String,
+        required: [true, "Accessory description is required!"],
         minLength: [20, "Accessory description must be at least 20 chars!"],
         match: [/^[A-Za-z0-9 ]$/, "Accessory description must be alphanumeric!"]
     },
