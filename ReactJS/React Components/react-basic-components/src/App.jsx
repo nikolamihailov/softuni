@@ -1,5 +1,6 @@
 import "./App.css";
 import MovieList from "./components/MovieList";
+import Timer from "./components/Timer";
 
 function App() {
   const movies = [
@@ -21,6 +22,7 @@ function App() {
   ];
   return (
     <div className="App">
+      <Timer time={0} />
       <MovieList movies={movies} />
     </div>
   );
