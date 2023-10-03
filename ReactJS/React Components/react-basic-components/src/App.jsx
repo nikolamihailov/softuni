@@ -1,4 +1,5 @@
 import "./App.css";
+import Counter from "./components/Counter";
 import MovieList from "./components/MovieList";
 import Timer from "./components/Timer";
 
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <Timer time={0} />
+      <Counter start={0} />
       <MovieList movies={movies} />
     </div>
   );
