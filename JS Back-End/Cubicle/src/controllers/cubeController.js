@@ -86,20 +86,13 @@ router.get("/:cubeId/edit", isAuth, async (req, res) => {
 router.post("/:cubeId/edit", isAuth, async (req, res) => {
     const cubeData = req.body;
     try {
-        const errors = [];
-        if (!cubeData.name || cubeData.name.trim().length < 5) errors.push("Cube name is required (5 characters) and must be alphanumeric!");
-        if (!cubeData.description || cubeData.description.trim().length < 20) errors.push("Cube description is required (20 characters) and must be alphanumeric!");
-        if (!cubeData.imageUrl || !/^https?:\/\/.+/.test(cubeData.imageUrl)) errors.push("Cube image is required and must be a valid link!");
-
-        if (errors.length > 0) {
-            throw new Error(errors.join(" "));
-        }
-        await cubeService.updateCube(req.params.cubeId, cubeData, { runValidators: true });
+        await cubeService.updateCube(req.params.cubeId, cubeData);
         res.redirect(`/cubes/${req.params.cubeId}/details`);
     } catch (error) {
         const cube = await cubeService.getCubeById(req.params.cubeId);
         const options = getDifficultyOptionsViewData(cube.difficultyLevel);
-        res.render("cube/edit", { cube, options, errors: error.message.split("! ") });
+        const errors = extractErrorMessages(error);
+        res.render("cube/edit", { cube, options, errors });
     }
 });
 
