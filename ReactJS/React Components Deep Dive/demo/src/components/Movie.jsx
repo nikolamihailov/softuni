@@ -21,11 +21,11 @@ const Movie = ({
         `Movie ${title} - unmounted(removed to the DOM)`
       );
     };
-  }, []);
+  }, [title]);
 
   useEffect(() => {
     console.log(`Movie ${title} - updated`);
-  }, [selected]);
+  }, [selected, title]);
 
   return (
     <article className={styles["movie-article"]}>
