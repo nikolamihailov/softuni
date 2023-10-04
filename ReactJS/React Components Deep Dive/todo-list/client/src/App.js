@@ -1,140 +1,55 @@
+import { useEffect, useState } from "react";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import LoadingSppiner from "./components/LoadingSpinner";
+import Todos from "./components/Todos";
 
 function App() {
+
+  const [todos, setTodos] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:3030/jsonstore/todos")
+      .then(res => res.json())
+      .then(data => {
+        const result = Object.keys(data).map(id => ({ id, ...data[id] }));
+        setTodos(result);
+        setTimeout(() => setIsLoading(false), 1500);
+      });
+  }, []);
+
+  const toggleTodoStatus = (id) => {
+    setTodos(state => state.map(t =>
+      t.id === id
+        ? { ...t, isCompleted: !t.isCompleted }
+        : t));
+  };
+
+  const onAddTodo = () => {
+    const lastId = todos.at(0)?._id ? +todos.at(-1)._id.split("todo_")[1] : +todos.at(0).id;
+    const text = prompt("Task name:");
+    const newTask = { id: lastId + 1, text, isCompleted: false };
+    setTodos(state => [newTask, ...state]);
+  };
+
   return (
-
-
-    <body>
-
-
-      <header className="navigation-header">
-        <span className="navigation-logo">
-          <img src="./static/images/todo-icon.png" alt="todo-logo" />
-        </span>
-        <span className="spacer"></span>
-        <span className="navigation-description">Todo List</span>
-      </header>
-
-
+    <div>
+      <Header />
       <main className="main">
-
-
         <section className="todo-list-container">
           <h1>Todo List</h1>
-
           <div className="add-btn-container">
-            <button className="btn">+ Add new Todo</button>
+            <button className="btn" onClick={onAddTodo}>+ Add new Todo</button>
           </div>
-
           <div className="table-wrapper">
-
-
-            <div className="loading-container">
-              <div className="loading-spinner">
-                <span className="loading-spinner-text">Loading</span>
-              </div>
-            </div>
-
-
-            <table className="table">
-              <thead>
-                <tr>
-                  <th className="table-header-task">Task</th>
-                  <th className="table-header-status">Status</th>
-                  <th className="table-header-action">Action</th>
-                </tr>
-              </thead>
-              <tbody>
-
-
-                <tr className="todo is-completed">
-                  <td>Give dog a bath</td>
-                  <td>Complete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-
-                <tr className="todo is-completed">
-                  <td>Do laundry</td>
-                  <td>Complete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-
-                <tr className="todo">
-                  <td>Vacuum floor</td>
-                  <td>Incomplete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-
-                <tr className="todo is-completed">
-                  <td>Feed cat</td>
-                  <td>Complete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-
-                <tr className="todo">
-                  <td>Change light bulbs</td>
-                  <td>Incomplete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-
-                <tr className="todo is-completed">
-                  <td>Feed cat</td>
-                  <td>Complete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-
-                <tr className="todo">
-                  <td>Change light bulbs</td>
-                  <td>Incomplete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-
-                <tr className="todo is-completed">
-                  <td>Go to Store</td>
-                  <td>Completed</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-
-                <tr className="todo">
-                  <td>Fill gas tank</td>
-                  <td>Incomplete</td>
-                  <td className="todo-action">
-                    <button className="btn todo-btn">Change status</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+            {/*   <LoadingSppiner /> */}
+            {isLoading ? <LoadingSppiner /> : <Todos todos={todos} toggleTodoStatus={toggleTodoStatus} />}
           </div>
         </section>
       </main>
-
-      <footer className="footer">
-        <p>Copyright © designed by Mihail Valkov</p>
-      </footer>
-
-    </body>
+      <Footer />
+    </div>
   );
 }
 
