@@ -2,11 +2,13 @@ import Movie from "./Movie";
 
 const MovieList = ({ movies }) => {
   return (
-    <div>
+    <ul>
       {movies.map((movie) => (
-        <Movie {...movie} />
+        <li key={movie.id}>
+          <Movie {...movie} />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 };
 
