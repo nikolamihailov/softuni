@@ -9,10 +9,15 @@ function App() {
   const removeMovie = (id) => {
     setMovies(oldMovies => oldMovies.filter(m => m.id !== id));
   };
+
+  const onSelectMovie = (id) => {
+    setMovies(oldMovies => oldMovies.map(m => ({ ...m, selected: m.id === id })));
+  };
+
   return (
     <div >
       <h2>Movie Collection</h2>
-      <MovieList movies={movies.slice(0, 3)} removeMovie={removeMovie} />
+      <MovieList movies={movies.slice(0, 3)} removeMovie={removeMovie} onSelectMovie={onSelectMovie} />
     </div>
   );
 }
