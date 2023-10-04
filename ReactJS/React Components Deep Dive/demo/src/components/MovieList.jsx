@@ -1,11 +1,11 @@
 import Movie from "./Movie";
 
-const MovieList = ({ movies }) => {
+const MovieList = ({ movies, removeMovie }) => {
   return (
     <ul>
       {movies.map((movie) => (
         <li key={movie.id}>
-          <Movie {...movie} />
+          <Movie {...movie} removeMovie={removeMovie} />
         </li>
       ))}
     </ul>
