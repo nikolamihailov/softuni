@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import styles from "./Movie.module.css";
 
 const Movie = ({
   id,
@@ -27,7 +28,7 @@ const Movie = ({
   }, [selected]);
 
   return (
-    <article>
+    <article className={styles["movie-article"]}>
       <h3
         style={{
           color: selected ? "red" : "inherit",

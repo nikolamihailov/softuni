@@ -1,0 +1,11 @@
+.movie-article {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  background-color: black;
+  border-radius: 25px;
+  margin: 15px;
+  padding: 20px;
+}
