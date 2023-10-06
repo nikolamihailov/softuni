@@ -89,9 +89,10 @@ router.post("/:cubeId/edit", isAuth, async (req, res) => {
         await cubeService.updateCube(req.params.cubeId, cubeData);
         res.redirect(`/cubes/${req.params.cubeId}/details`);
     } catch (error) {
-        const cube = await cubeService.getCubeById(req.params.cubeId);
-        const options = getDifficultyOptionsViewData(cube.difficultyLevel);
+        const cubeD = await cubeService.getCubeById(req.params.cubeId);
+        const options = getDifficultyOptionsViewData(cubeD.difficultyLevel);
         const errors = extractErrorMessages(error);
+        const cube = req.body;
         res.render("cube/edit", { cube, options, errors });
     }
 });

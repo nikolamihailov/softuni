@@ -8,6 +8,7 @@
             <textarea id="description" name="description">{{cube.description}}</textarea>
             <label for="image">ImageUrl</label>
             <input type="text" id="image" name="imageUrl" value="{{cube.imageUrl}}">
+            <img id="cubeImage"src="{{#if cube.imageUrl}}{{cube.imageUrl}}{{else}}/images/no-image.jpg{{/if}}" alt="{{cube.name}}">
             <label for="difficulty">Difficulty</label>
             <select id="difficulty" name="difficultyLevel" />
            {{#each options}}
@@ -18,3 +19,13 @@
         </form>
     </div>
 </main>
+
+<script>
+    const imageUrlInput = document.getElementById('image');
+    const cubeImage = document.getElementById('cubeImage');
+
+    imageUrlInput.addEventListener('input', function () {
+        const imageUrl = imageUrlInput.value;
+        cubeImage.src = imageUrl;
+    });
+</script>
