@@ -1,10 +1,12 @@
 import { useState } from "react";
 import User from "./User";
 import UserDetails from "./UserDetails";
+import UserCreate from "./UserCreate";
 import { userService } from "../services/userService";
 
-const UserList = ({ users }) => {
+const UserList = ({ users, onUserCreateClick }) => {
   const [isSelectedUser, setSelectedUser] = useState(null);
+  const [isAddUserOpen, setIsAddUserOpen] = useState(false);
 
   const onInfoClick = async (userId) => {
     const user = await userService.getUserById(userId);
@@ -13,15 +15,32 @@ const UserList = ({ users }) => {
     }
   };
 
-  const onInfoClose = () => {
+  const onClose = () => {
     setSelectedUser(null);
+    setIsAddUserOpen(false);
   };
+
+  const onAddUser = () => {
+    setIsAddUserOpen(true);
+  };
+
+  const onUserCreateHandler = (e) => {
+    onUserCreateClick(e);
+    setIsAddUserOpen(false);
+  };
+
   return (
     <>
       {isSelectedUser && (
         <UserDetails
           {...isSelectedUser}
-          onInfoClose={onInfoClose}
+          onClose={onClose}
+        />
+      )}
+      {isAddUserOpen && (
+        <UserCreate
+          onClose={onClose}
+          onUserCreateClick={onUserCreateHandler}
         />
       )}
       <div className="table-wrapper">
@@ -198,6 +217,9 @@ const UserList = ({ users }) => {
           </tbody>
         </table>
       </div>
+      <button className="btn-add btn" onClick={onAddUser}>
+        Add new user
+      </button>
     </>
   );
 };

@@ -8,7 +8,7 @@ const UserDetails = ({
   address,
   createdAt,
   updatedAt,
-  onInfoClose,
+  onClose,
 }) => {
   return (
     <div className="overlay">
@@ -17,10 +17,7 @@ const UserDetails = ({
         <div className="detail-container">
           <header className="headers">
             <h2>User Detail</h2>
-            <button
-              className="btn close"
-              onClick={onInfoClose}
-            >
+            <button className="btn close" onClick={onClose}>
               <svg
                 aria-hidden="true"
                 focusable="false"

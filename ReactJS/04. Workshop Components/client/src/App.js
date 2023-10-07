@@ -4,9 +4,12 @@ import Header from './components/Header';
 import Search from './components/Search';
 import UserList from './components/UserList';
 import { userService } from "./services/userService";
+
+
 function App() {
 
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
     userService.getAllUsers()
       .then(users => setUsers(users))
@@ -15,14 +18,24 @@ function App() {
       });
   }, []);
 
+  const onUserCreateClick = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    const user = await userService.createUser(data);
+
+    setUsers(state => [...state, user]);
+  };
+
+
   return (
     <>
       <Header />
       <main className="main">
         <section className="card users-container">
           <Search />
-          <UserList users={users} />
-          <button className="btn-add btn">Add new user</button>
+          <UserList users={users} onUserCreateClick={onUserCreateClick} />
+
         </section>
       </main>
       <Footer />
