@@ -23,8 +23,15 @@ function App() {
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
     const user = await userService.createUser(data);
-
     setUsers(state => [...state, user]);
+  };
+
+  const onUserDelete = async (userId) => {
+
+    const user = await userService.deleteUser(userId);
+
+    console.log(user);
+    setUsers(state => state.filter(x => x._id !== userId));
   };
 
 
@@ -34,7 +41,7 @@ function App() {
       <main className="main">
         <section className="card users-container">
           <Search />
-          <UserList users={users} onUserCreateClick={onUserCreateClick} />
+          <UserList users={users} onUserCreateClick={onUserCreateClick} onUserDelete={onUserDelete} />
 
         </section>
       </main>

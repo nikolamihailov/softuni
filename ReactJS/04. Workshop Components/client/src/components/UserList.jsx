@@ -3,10 +3,18 @@ import User from "./User";
 import UserDetails from "./UserDetails";
 import UserCreate from "./UserCreate";
 import { userService } from "../services/userService";
+import UserDelete from "./UserDelete";
 
-const UserList = ({ users, onUserCreateClick }) => {
+const UserList = ({
+  users,
+  onUserCreateClick,
+  onUserDelete,
+}) => {
   const [isSelectedUser, setSelectedUser] = useState(null);
   const [isAddUserOpen, setIsAddUserOpen] = useState(false);
+  const [isDeleteUserOpen, setIsDeleteUserOpen] =
+    useState(false);
+  const [deleteUserId, setDeleteUserId] = useState(null);
 
   const onInfoClick = async (userId) => {
     const user = await userService.getUserById(userId);
@@ -18,6 +26,7 @@ const UserList = ({ users, onUserCreateClick }) => {
   const onClose = () => {
     setSelectedUser(null);
     setIsAddUserOpen(false);
+    setIsDeleteUserOpen(false);
   };
 
   const onAddUser = () => {
@@ -27,6 +36,15 @@ const UserList = ({ users, onUserCreateClick }) => {
   const onUserCreateHandler = (e) => {
     onUserCreateClick(e);
     setIsAddUserOpen(false);
+  };
+
+  const onDeleteUser = (userId) => {
+    setDeleteUserId({ _id: userId });
+    setIsDeleteUserOpen(true);
+  };
+  const onDeleteHandler = () => {
+    onUserDelete(deleteUserId._id);
+    onClose();
   };
 
   return (
@@ -43,6 +61,13 @@ const UserList = ({ users, onUserCreateClick }) => {
           onUserCreateClick={onUserCreateHandler}
         />
       )}
+      {isDeleteUserOpen && (
+        <UserDelete
+          onClose={onClose}
+          onUserDelete={onDeleteHandler}
+        />
+      )}
+
       <div className="table-wrapper">
         {/*    <div className="loading-shade">
         <div className="spinner"></div>
@@ -211,6 +236,7 @@ const UserList = ({ users, onUserCreateClick }) => {
                   key={u._id}
                   {...u}
                   onInfoClick={onInfoClick}
+                  onDeleteClick={onDeleteUser}
                 />
               );
             })}
