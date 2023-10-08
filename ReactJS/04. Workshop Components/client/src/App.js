@@ -1,53 +1,78 @@
 import { useEffect, useState } from 'react';
-import Footer from './components/Footer';
-import Header from './components/Header';
-import Search from './components/Search';
-import UserList from './components/UserList';
-import { userService } from "./services/userService";
 
+import * as userService from './services/userService';
+
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
+import { Search } from "./components/Search";
+import './App.css';
+import { UserList } from "./components/UserList";
 
 function App() {
+    const [users, setUsers] = useState([]);
 
-  const [users, setUsers] = useState([]);
+    useEffect(() => {
+        userService.getAll()
+            .then(setUsers)
+            .catch(err => {
+                console.log('Error' + err);
+            });
+    }, []);
 
-  useEffect(() => {
-    userService.getAllUsers()
-      .then(users => setUsers(users))
-      .catch(err => {
-        console.log(err);
-      });
-  }, []);
+    const onUserCreateSubmit = async (e) => {
+        // stop automatic form submit
+        e.preventDefault();
 
-  const onUserCreateClick = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-    const user = await userService.createUser(data);
-    setUsers(state => [...state, user]);
-  };
+        // Take form data from DOM tree 
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
 
-  const onUserDelete = async (userId) => {
+        // Send ajax request to server
+        const createdUser = await userService.create(data);
 
-    const user = await userService.deleteUser(userId);
+        // If successfull add new user to the state
+        setUsers(state => [...state, createdUser]);
+    };
 
-    console.log(user);
-    setUsers(state => state.filter(x => x._id !== userId));
-  };
+    const onUserUpdateSubmit = async (e, userId) => {
+        e.preventDefault();
 
+        const formData = new FormData(e.currentTarget);
+        const data = Object.fromEntries(formData);
 
-  return (
-    <>
-      <Header />
-      <main className="main">
-        <section className="card users-container">
-          <Search />
-          <UserList users={users} onUserCreateClick={onUserCreateClick} onUserDelete={onUserDelete} />
+        const updatedUser = await userService.update(userId, data);
 
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
+        setUsers(state => state.map(x => x._id === userId ? updatedUser : x));
+    }
+
+    const onUserDelete = async (userId) => {
+        // Delete from server
+        await userService.remove(userId);
+
+        // Delete from state
+        setUsers(state => state.filter(x => x._id !== userId));
+    };
+
+    return (
+        <>
+            <Header />
+
+            <main className="main">
+                <section className="card users-container">
+                    <Search />
+
+                    <UserList
+                        users={users}
+                        onUserCreateSubmit={onUserCreateSubmit}
+                        onUserUpdateSubmit={onUserUpdateSubmit}
+                        onUserDelete={onUserDelete}
+                    />
+                </section>
+            </main>
+
+            <Footer />
+        </>
+    );
 }
 
 export default App;
