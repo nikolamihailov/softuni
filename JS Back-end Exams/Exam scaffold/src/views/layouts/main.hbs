@@ -6,7 +6,7 @@
 
     <!-- Do not forget to change the path to the css file -->
     <link
-      href="./static/css/style.css"
+      href="/css/style.css"
       type="text/css"
       rel="stylesheet"
     />
@@ -25,10 +25,10 @@
 
       <nav>
         <!-- Do not forget to change the path to the image -->
-        <img src="./static/img/logo.png" alt="logo" />
+        <img src="/img/logo.png" alt="logo" />
 
         <ul class="menu">
-          <li><a href="#">Home</a></li>
+          <li><a href="/">Home</a></li>
           <li><a href="#">All Posts</a></li>
           <!-- Logged users -->
           <li><a href="#">Create Post</a></li>
@@ -40,8 +40,7 @@
         </ul>
 
       </nav>
-      {{content}}
-
+      {{{body}}}
       <footer>
         © JS Back-End Exam 2023
       </footer>
