@@ -5,7 +5,7 @@ const { SECRET } = require("../constants");
 
 exports.register = async (userData) => {
     const { firstName, lastName, email } = userData;
-    User.create(userData);
+    const user = await User.create(userData);
     const payload = { firstName, lastName, email };
     const token = await jwt.sign(payload, SECRET, { expiresIn: "1d" });
     return token;

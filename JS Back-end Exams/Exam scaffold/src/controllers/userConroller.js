@@ -1,15 +1,22 @@
 const router = require("express").Router();
 const userService = require("../services/userService");
+const { extractErrors } = require("../utils/errorHelper");
 
 router.get("/register", (req, res) => {
     res.render("user/register");
 });
 
 router.post("/register", async (req, res) => {
-    const { firstName, lastName, email, password, repeatPassword } = req.body;
-    const token = await userService.register({ firstName, lastName, email, password, repeatPassword });
-    res.cookie("auth", token);
-    res.redirect("/");
+    try {
+        const { firstName, lastName, email, password, repeatPassword } = req.body;
+        const token = await userService.register({ firstName, lastName, email, password, repeatPassword });
+        res.cookie("auth", token, { httpOnly: true });
+        res.redirect("/");
+    } catch (error) {
+        const errors = extractErrors(error);
+        console.log(errors);
+        res.render("user/register", { errors });
+    }
 });
 
 router.get("/login", (req, res) => {
@@ -17,10 +24,15 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-    const { email, password } = req.body;
-    const token = await userService.login({ email, password });
-    res.cookie("auth", token);
-    res.redirect("/");
+    try {
+        const { email, password } = req.body;
+        const token = await userService.login(email, password);
+        res.cookie("auth", token, { httpOnly: true });
+        res.redirect("/");
+    } catch (error) {
+        const errors = extractErrors(error);
+        res.render("user/login", { errors });
+    }
 });
 
 
