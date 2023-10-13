@@ -1,14 +1,13 @@
 const express = require("express");
+const { PORT } = require("./constants");
 
 const app = express();
 const expressConfig = require("./config/expressConfig");
 const handlebarsConfig = require("./config/handlebarsConfig");
+const routes = require("./routes");
 
 expressConfig(app);
 handlebarsConfig(app);
+app.use(routes);
 
-app.get("/", (req, res) => {
-    res.render("home");
-});
-
-app.listen(3000, () => console.log("Server is listneing on port 3000"));
+app.listen(PORT, () => console.log(`Server is listening on port ${PORT}`));
