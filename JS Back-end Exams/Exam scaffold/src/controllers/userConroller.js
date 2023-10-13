@@ -14,7 +14,6 @@ router.post("/register", async (req, res) => {
         res.redirect("/");
     } catch (error) {
         const errors = extractErrors(error);
-        console.log(errors);
         res.render("user/register", { errors });
     }
 });
