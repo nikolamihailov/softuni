@@ -33,14 +33,17 @@
 
         <ul class="menu">
           <li><a href="/">Home</a></li>
-          <li><a href="#">All Posts</a></li>
-          <!-- Logged users -->
-          <li><a href="#">Create Post</a></li>
-          <li><a href="#">Profile</a></li>
-          <li><a href="/users/logout">Logout</a></li>
-          <!-- Guest users -->
-          <li><a href="/users/register">Register</a></li>
-          <li><a href="/users/login">Login</a></li>
+          <li><a href="/posts/all">All Posts</a></li>
+          {{#if isAuthenticated}}
+            <!-- Logged users -->
+            <li><a href="/posts/create">Create Post</a></li>
+            <li><a href="/profile">Profile</a></li>
+            <li><a href="/users/logout">Logout</a></li>
+          {{else}}
+            <!-- Guest users -->
+            <li><a href="/users/register">Register</a></li>
+            <li><a href="/users/login">Login</a></li>
+          {{/if}}
         </ul>
 
       </nav>
