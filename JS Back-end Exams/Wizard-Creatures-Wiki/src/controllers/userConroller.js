@@ -13,8 +13,9 @@ router.post("/register", async (req, res) => {
         res.cookie("auth", token, { httpOnly: true });
         res.redirect("/");
     } catch (error) {
+        const userData = req.body;
         const errors = extractErrors(error);
-        res.render("user/register", { errors });
+        res.render("user/register", { errors, userData });
     }
 });
 
@@ -30,7 +31,7 @@ router.post("/login", async (req, res) => {
         res.redirect("/");
     } catch (error) {
         const errors = extractErrors(error);
-        res.render("user/login", { errors });
+        res.render("user/login", { errors, email: req.body.email });
     }
 });
 
