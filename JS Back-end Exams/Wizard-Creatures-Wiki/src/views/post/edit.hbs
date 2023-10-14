@@ -15,7 +15,7 @@
               class="inputFields"
               id="name"
               name="name"
-              value={{post.name}}
+              value="{{post.name}}"
             />
           </li>
           <li>
@@ -25,7 +25,7 @@
               class="inputFields"
               id="species"
               name="species"
-              value={{post.species}}
+              value="{{post.species}}"
             />
           </li>
           <li>
@@ -35,7 +35,7 @@
               class="inputFields"
               id="skin"
               name="skinColor"
-              value={{post.skinColor}}
+              value="{{post.skinColor}}"
             />
           </li>
           <li>
@@ -45,7 +45,7 @@
               class="inputFields"
               id="eye"
               name="eyeColor"
-              value={{post.eyeColor}}
+              value="{{post.eyeColor}}"
             />
           </li>
           <li>
@@ -55,8 +55,11 @@
               class="inputFields"
               id="image"
               name="image"
-              value={{post.image}}
+              value="{{post.image}}"
             />
+          </li>
+          <li>
+            <img id="postImage"src="{{#if post.image}}{{post.image}}{{else}}/img/no-image.jpg{{/if}}" alt="{{post.name}}" style="width: 80px; height: 80px">
           </li>
           <li>
             <label for="description">Description:</label>
@@ -74,3 +77,12 @@
     </div>
   </section>
 </main>
+
+<script>
+  const imageUrlInput = document.getElementById('image');
+  const postImage = document.getElementById('postImage');
+  imageUrlInput.addEventListener('input', function () {
+  const imageUrl = imageUrlInput.value;
+   postImage.src =imageUrl;   
+   });
+</script>

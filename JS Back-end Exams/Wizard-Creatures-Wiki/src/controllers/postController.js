@@ -18,8 +18,9 @@ router.post("/create", auth, async (req, res) => {
         await postService.createPost({ name, species, skinColor, eyeColor, image, description, owner: req.user._id });
         res.redirect("/posts/all");
     } catch (error) {
+        const postData = req.body;
         const errors = extractErrors(error);
-        res.render("post/create", { errors });
+        res.render("post/create", { errors, postData });
     }
 });
 
@@ -69,8 +70,9 @@ router.post("/:postId/edit", auth, async (req, res) => {
         await postService.updatePost(postId, { name, species, skinColor, eyeColor, image, description });
         res.redirect(`/posts/${postId}/details`);
     } catch (error) {
+        const post = req.body;
         const errors = extractErrors(error);
-        res.render("post/edit", { errors });
+        res.render("post/edit", { errors, post });
     }
 });
 

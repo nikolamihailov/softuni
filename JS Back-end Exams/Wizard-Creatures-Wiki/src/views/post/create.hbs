@@ -19,7 +19,7 @@
               id="name"
               placeholder="Delphini"
               name="name"
-              value=""
+              value="{{postData.name}}"
             />
           </li>
           <li>
@@ -30,7 +30,7 @@
               id="species"
               placeholder="Human"
               name="species"
-              value=""
+              value="{{postData.species}}"
             />
           </li>
           <li>
@@ -41,7 +41,7 @@
               id="skin"
               placeholder="Black"
               name="skinColor"
-              value=""
+              value="{{postData.skinColor}}"
             />
           </li>
           <li>
@@ -52,7 +52,7 @@
               id="eye"
               placeholder="Black"
               name="eyeColor"
-              value=""
+              value="{{postData.eyeColor}}"
             />
           </li>
           <li>
@@ -63,8 +63,11 @@
               id="image"
               placeholder="http:/..."
               name="image"
-              value=""
+              value="{{postData.image}}"
             />
+          </li>
+                    <li>
+            <img id="postImage"src="{{#if post.image}}{{post.image}}{{else}}/img/no-image.jpg{{/if}}" alt="{{post.name}}" style="width: 80px; height: 80px">
           </li>
           <li>
             <label for="description">Description:</label>
@@ -73,7 +76,7 @@
               class="inputFields"
               name="description"
               placeholder="Creature..."
-            ></textarea>
+            >{{postData.description}}</textarea>
           </li>
           <li id="center-btn">
             <button id="create-btn">Create</button>
@@ -83,3 +86,12 @@
     </div>
   </section>
 </main>
+
+<script>
+  const imageUrlInput = document.getElementById('image');
+  const postImage = document.getElementById('postImage');
+  imageUrlInput.addEventListener('input', function () {
+  const imageUrl = imageUrlInput.value;
+   postImage.src =imageUrl;   
+   });
+</script>
