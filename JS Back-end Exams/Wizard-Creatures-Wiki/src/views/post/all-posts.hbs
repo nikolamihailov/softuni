@@ -1,0 +1,18 @@
+<main>
+  <section id="catalog">
+    <h1>All posts</h1>
+    <div class="band">
+      <!-- If there are posts for creature in the database display each of them -->
+      {{#if posts}}
+        {{#each posts}}
+          {{>post}}
+        {{/each}}
+      {{else}}
+        <!-- If there are still no posts in the database display: -->
+        <div class="no-posts">
+          <p class="no-offer">There are no posts yet...</p>
+        </div>
+      {{/if}}
+    </div>
+  </section>
+</main>
