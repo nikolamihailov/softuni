@@ -3,7 +3,7 @@ const userService = require("../services/userService");
 const { extractErrors } = require("../utils/errorHelper");
 
 router.get("/register", (req, res) => {
-    res.render("user/register");
+    res.render("user/register", { title: "Register" });
 });
 
 router.post("/register", async (req, res) => {
@@ -13,13 +13,14 @@ router.post("/register", async (req, res) => {
         res.cookie("auth", token, { httpOnly: true });
         res.redirect("/");
     } catch (error) {
+        const userData = req.body;
         const errors = extractErrors(error);
-        res.render("user/register", { errors });
+        res.render("user/register", { title: "Register", errors, userData });
     }
 });
 
 router.get("/login", (req, res) => {
-    res.render("user/login");
+    res.render("user/login", { title: "Login" });
 });
 
 router.post("/login", async (req, res) => {
@@ -30,7 +31,7 @@ router.post("/login", async (req, res) => {
         res.redirect("/");
     } catch (error) {
         const errors = extractErrors(error);
-        res.render("user/login", { errors });
+        res.render("user/login", { title: "Login", errors, email: req.body.email });
     }
 });
 

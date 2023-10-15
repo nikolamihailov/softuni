@@ -2,7 +2,13 @@
 
   <head>
     <meta charset="UTF-8" />
-    <title>Home Page</title>
+    <title>
+      {{#if title}}
+        {{title}}
+      {{else}}
+        Wizard Creatures Wiki
+      {{/if}}
+    </title>
 
     <!-- Do not forget to change the path to the css file -->
     <link
