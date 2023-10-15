@@ -5,11 +5,11 @@ const { extractErrors } = require("../utils/errorHelper");
 
 router.get("/all", async (req, res) => {
     const posts = await postService.getAllPosts();
-    res.render("post/all-posts", { posts });
+    res.render("post/all-posts", { title: "All posts", posts });
 });
 
 router.get("/create", auth, (req, res) => {
-    res.render("post/create");
+    res.render("post/create", { title: "Create post" });
 });
 
 router.post("/create", auth, async (req, res) => {
@@ -20,7 +20,7 @@ router.post("/create", auth, async (req, res) => {
     } catch (error) {
         const postData = req.body;
         const errors = extractErrors(error);
-        res.render("post/create", { errors, postData });
+        res.render("post/create", { title: "Create post", errors, postData });
     }
 });
 
@@ -34,9 +34,9 @@ router.get("/:postId/details", async (req, res) => {
             const author = req.user.firstName + " " + req.user.lastName;
             const isAuthor = req.user?._id === post.owner.toString();
             const canVote = !isAuthor && !post.votes.some(v => v._id.toString() === req.user._id);
-            res.render("post/details", { post, author, isAuthor, canVote, votes, voters });
+            res.render("post/details", { title: `${post.name} details`, post, author, isAuthor, canVote, votes, voters });
         } else {
-            res.render("post/details", { post, votes, voters });
+            res.render("post/details", { title: `${post.name} details`, post, votes, voters });
         }
     } catch (error) {
         res.redirect("/error-404-page");
@@ -49,7 +49,7 @@ router.get("/:postId/vote", auth, async (req, res) => {
         await postService.voteOnPost(postId, req.user._id);
         res.redirect(`/posts/${postId}/details`);
     } catch (error) {
-        res.redirect("/error-404-page");
+        res.redirect("/error-404-page", { title: "Error page" });
     }
 });
 
@@ -57,9 +57,9 @@ router.get("/:postId/edit", auth, isPostOwner, async (req, res) => {
     try {
         const postId = req.params.postId;
         const post = await postService.getPostById(postId);
-        res.render("post/edit", { post });
+        res.render("post/edit", { title: `Edit ${post.name}`, post });
     } catch (error) {
-        res.redirect("/error-404-page");
+        res.redirect("/error-404-page", { title: "Error page" });
     }
 });
 
@@ -72,7 +72,7 @@ router.post("/:postId/edit", auth, isPostOwner, async (req, res) => {
     } catch (error) {
         const post = req.body;
         const errors = extractErrors(error);
-        res.render("post/edit", { errors, post });
+        res.render("post/edit", { title: `Edit ${post.name}`, errors, post });
     }
 });
 
@@ -82,7 +82,7 @@ router.get("/:postId/delete", auth, isPostOwner, async (req, res) => {
         await postService.deletePost(postId);
         res.redirect("/posts/all");
     } catch (error) {
-        res.redirect("/error-404-page");
+        res.redirect("/error-404-page", { title: "Error page" });
     }
 });
 
@@ -93,9 +93,9 @@ router.get("/my-posts", auth, async (req, res) => {
         const author = req.user.firstName + " " + req.user.lastName;
         console.log(author);
         console.log(posts);
-        res.render("post/my-posts", { posts, author });
+        res.render("post/my-posts", { title: "Profile", posts, author });
     } catch (error) {
-        res.redirect("/error-404-page");
+        res.redirect("/error-404-page", { title: "Error page" });
     }
 });
 
