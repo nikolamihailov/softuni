@@ -1,5 +1,6 @@
 const { SECRET } = require("../constants");
 const jwt = require("../lib/jwt");
+const Creature = require("../models/Creature");
 
 exports.isAuth = async (req, res, next) => {
     const token = req.cookies["auth"];
@@ -23,3 +24,11 @@ exports.auth = (req, res, next) => {
     if (!req.user) return res.redirect("/users/login");
     next();
 };
+
+exports.isPostOwner = async (req, res, next) => {
+    const postId = req.params.postId;
+    const post = await Creature.findById(postId);
+    if (req.user._id !== post.owner.toString()) return res.redirect("/error-404-page");
+    next();
+};
+

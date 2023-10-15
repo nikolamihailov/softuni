@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const postService = require("../services/postService");
-const { auth } = require("../middlewares/authMiddleware");
+const { auth, isPostOwner } = require("../middlewares/authMiddleware");
 const { extractErrors } = require("../utils/errorHelper");
 
 router.get("/all", async (req, res) => {
@@ -32,7 +32,7 @@ router.get("/:postId/details", async (req, res) => {
         const voters = post.votes.map(p => p.email).join(", ");
         if (req.user) {
             const author = req.user.firstName + " " + req.user.lastName;
-            const isAuthor = req.user?._id === post.owner._id.toString();
+            const isAuthor = req.user?._id === post.owner.toString();
             const canVote = !isAuthor && !post.votes.some(v => v._id.toString() === req.user._id);
             res.render("post/details", { post, author, isAuthor, canVote, votes, voters });
         } else {
@@ -53,7 +53,7 @@ router.get("/:postId/vote", auth, async (req, res) => {
     }
 });
 
-router.get("/:postId/edit", auth, async (req, res) => {
+router.get("/:postId/edit", auth, isPostOwner, async (req, res) => {
     try {
         const postId = req.params.postId;
         const post = await postService.getPostById(postId);
@@ -63,7 +63,7 @@ router.get("/:postId/edit", auth, async (req, res) => {
     }
 });
 
-router.post("/:postId/edit", auth, async (req, res) => {
+router.post("/:postId/edit", auth, isPostOwner, async (req, res) => {
     try {
         const postId = req.params.postId;
         const { name, species, skinColor, eyeColor, image, description } = req.body;
@@ -76,7 +76,7 @@ router.post("/:postId/edit", auth, async (req, res) => {
     }
 });
 
-router.get("/:postId/delete", auth, async (req, res) => {
+router.get("/:postId/delete", auth, isPostOwner, async (req, res) => {
     try {
         const postId = req.params.postId;
         await postService.deletePost(postId);
