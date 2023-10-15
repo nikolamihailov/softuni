@@ -57,7 +57,7 @@ router.get("/:postId/edit", auth, isPostOwner, async (req, res) => {
     try {
         const postId = req.params.postId;
         const post = await postService.getPostById(postId);
-        res.render("post/edit", { title: `Edit ${post.name}`, post });
+        res.render("post/edit", { title: `Edit ${post.name ? post.name : "creature"}`, post });
     } catch (error) {
         res.redirect("/error-404-page", { title: "Error page" });
     }
@@ -72,7 +72,7 @@ router.post("/:postId/edit", auth, isPostOwner, async (req, res) => {
     } catch (error) {
         const post = req.body;
         const errors = extractErrors(error);
-        res.render("post/edit", { title: `Edit ${post.name}`, errors, post });
+        res.render("post/edit", { title: `Edit ${post.name ? post.name : "creature"}`, errors, post });
     }
 });
 
