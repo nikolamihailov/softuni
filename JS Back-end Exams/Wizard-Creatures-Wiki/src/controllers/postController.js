@@ -32,7 +32,7 @@ router.get("/:postId/details", async (req, res) => {
         const voters = post.votes.map(p => p.email).join(", ");
         if (req.user) {
             const author = req.user.firstName + " " + req.user.lastName;
-            const isAuthor = req.user?._id === post.owner.toString();
+            const isAuthor = req.user._id === post.owner.toString();
             const canVote = !isAuthor && !post.votes.some(v => v._id.toString() === req.user._id);
             res.render("post/details", { title: `${post.name} details`, post, author, isAuthor, canVote, votes, voters });
         } else {
