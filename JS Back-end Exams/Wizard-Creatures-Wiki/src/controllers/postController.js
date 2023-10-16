@@ -49,7 +49,7 @@ router.get("/:postId/vote", auth, async (req, res) => {
         await postService.voteOnPost(postId, req.user._id);
         res.redirect(`/posts/${postId}/details`);
     } catch (error) {
-        res.redirect("/error-404-page", { title: "Error page" });
+        res.redirect("/error-404-page");
     }
 });
 
@@ -59,7 +59,7 @@ router.get("/:postId/edit", auth, isPostOwner, async (req, res) => {
         const post = await postService.getPostById(postId);
         res.render("post/edit", { title: `Edit ${post.name ? post.name : "creature"}`, post });
     } catch (error) {
-        res.redirect("/error-404-page", { title: "Error page" });
+        res.redirect("/error-404-page");
     }
 });
 
@@ -82,7 +82,7 @@ router.get("/:postId/delete", auth, isPostOwner, async (req, res) => {
         await postService.deletePost(postId);
         res.redirect("/posts/all");
     } catch (error) {
-        res.redirect("/error-404-page", { title: "Error page" });
+        res.redirect("/error-404-page");
     }
 });
 
@@ -95,7 +95,7 @@ router.get("/my-posts", auth, async (req, res) => {
         console.log(posts);
         res.render("post/my-posts", { title: "Profile", posts, author });
     } catch (error) {
-        res.redirect("/error-404-page", { title: "Error page" });
+        res.redirect("/error-404-page");
     }
 });
 
