@@ -1,37 +1,52 @@
 <main id="register">
   <!-- In case of error, you should display div with class "errorContainer" -->
   <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-  <!-- <div>
-            <div class="errorContainer">
-                <p>Error</p>
-            </div>
-        </div> -->
+
+  {{#if errors}}
+    <div>
+      <div class="errorContainer">
+        {{#each errors}}
+          <p>{{this}}</p>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
 
   <div class="register-box">
     <h1>Register</h1>
     <h4>It's free and only takes a minute</h4>
     <form method="POST">
       <label>Username</label>
-      <input type="text" name="" placeholder="Username.." />
+      <input
+        type="text"
+        name="username"
+        placeholder="Username.."
+        value="{{userData.username}}"
+      />
       <label>Email</label>
-      <input type="text" name="" placeholder="Email.." />
+      <input
+        type="text"
+        name="email"
+        placeholder="Email.."
+        value="{{userData.email}}"
+      />
       <label>Password</label>
       <input
         type="password"
-        name=""
+        name="password"
         placeholder="Password.."
       />
       <label>Confirm Password</label>
       <input
         type="password"
-        name=""
+        name="confirmPassword"
         placeholder="Confirm Password.."
       />
       <input type="submit" value="Register" />
     </form>
     <p>
       Already have an account?
-      <a href="#">Login here</a>
+      <a href="/users/login">Login here</a>
     </p>
   </div>
 </main>

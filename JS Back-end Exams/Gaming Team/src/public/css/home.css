@@ -53,7 +53,7 @@ nav ul li a {
 }
 
 .content h1 span {
-  color: #096BAB;
+  color: #096bab;
 }
 
 .content p {
@@ -62,13 +62,13 @@ nav ul li a {
 }
 
 .content strong {
-    color: #2E87CB
+  color: #2e87cb;
 }
 
 .content .buy {
   display: inline-block;
   margin-top: 30px;
-  background: #2E87CB;
+  background: #2e87cb;
   color: #fff;
   text-decoration: none;
   padding: 15px 50px;
@@ -88,18 +88,18 @@ footer p {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    border-radius: 8px;
-    background-color: #e7e7e7;
-    border: 1px solid #cacaca;
+  border-radius: 8px;
+  background-color: #e7e7e7;
+  border: 1px solid #cacaca;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 8px;
-    background-color: #050912;
+  border-radius: 8px;
+  background-color: #050912;
 }
 
 .errorContainer {
@@ -118,11 +118,12 @@ footer p {
 }
 
 .errorContainer > p {
-  background: #2E87CB;
+  background: #2e87cb;
   font-size: 20px;
   padding: 20px;
   height: auto;
   border-radius: 20px;
+  margin-bottom: 10px;
 }
 
 .errorContainer {
