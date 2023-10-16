@@ -66,7 +66,7 @@ router.get("/:gameId/edit", auth, isGameOwner, async (req, res) => {
 });
 
 
-router.post("/:gameId/edit", auth, isGameOwner, async (req, res) => {
+router.post("/:gameId/edit", auth, isGameOwner, trimBody, async (req, res) => {
     const game = req.body;
     try {
         const gameId = req.params.gameId;
@@ -89,7 +89,7 @@ router.get("/:gameId/delete", auth, isGameOwner, async (req, res) => {
     }
 });
 
-router.get("/search", auth, async (req, res) => {
+router.get("/search", auth, trimBody, async (req, res) => {
     try {
         const { name, platform } = req.query;
         const games = await gameService.getAllGames(name, platform);
