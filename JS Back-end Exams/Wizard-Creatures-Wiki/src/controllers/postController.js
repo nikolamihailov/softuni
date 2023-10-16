@@ -2,17 +2,22 @@ const router = require("express").Router();
 const postService = require("../services/postService");
 const { auth, isPostOwner } = require("../middlewares/authMiddleware");
 const { extractErrors } = require("../utils/errorHelper");
+const { trimBody } = require("../middlewares/trimBody");
 
 router.get("/all", async (req, res) => {
-    const posts = await postService.getAllPosts();
-    res.render("post/all-posts", { title: "All posts", posts });
+    try {
+        const posts = await postService.getAllPosts();
+        res.render("post/all-posts", { title: "All posts", posts });
+    } catch (error) {
+        res.redirect("/error-404-page");
+    }
 });
 
 router.get("/create", auth, (req, res) => {
     res.render("post/create", { title: "Create post" });
 });
 
-router.post("/create", auth, async (req, res) => {
+router.post("/create", auth, trimBody, async (req, res) => {
     try {
         const { name, species, skinColor, eyeColor, image, description } = req.body;
         await postService.createPost({ name, species, skinColor, eyeColor, image, description, owner: req.user._id });
@@ -63,7 +68,7 @@ router.get("/:postId/edit", auth, isPostOwner, async (req, res) => {
     }
 });
 
-router.post("/:postId/edit", auth, isPostOwner, async (req, res) => {
+router.post("/:postId/edit", auth, isPostOwner, trimBody, async (req, res) => {
     try {
         const postId = req.params.postId;
         const { name, species, skinColor, eyeColor, image, description } = req.body;
