@@ -1,5 +1,6 @@
 const { SECRET } = require("../constants");
 const jwt = require("../lib/jwt");
+const Game = require("../models/Game");
 
 exports.isAuth = async (req, res, next) => {
     const token = req.cookies["auth"];
@@ -25,9 +26,9 @@ exports.auth = (req, res, next) => {
 };
 
 // check if the current logged user is the creator
-/* exports.isPostOwner = async (req, res, next) => {
-    const postId = req.params.postId;
-    const post = await Creature.findById(postId);
-    if (req.user._id !== post.owner.toString()) return res.redirect("/error-404-page");
+exports.isGameOwner = async (req, res, next) => {
+    const gameId = req.params.gameId;
+    const game = await Game.findById(gameId);
+    if (req.user._id !== game.owner.toString()) return res.redirect("/error-404-page");
     next();
-}; */
+}; 
