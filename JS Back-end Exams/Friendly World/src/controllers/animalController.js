@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { auth, isAnimalCreator } = require("../middlewares/authMiddleware");
+const { trimBody } = require("../middlewares/trimBody");
 const animalService = require("../services/animalService");
 const { extractErrors } = require("../utils/errorHelper");
 
@@ -7,7 +8,7 @@ router.get("/add", (req, res) => {
     res.render("animal/create", { title: "Add animal" });
 });
 
-router.post("/add", auth, async (req, res) => {
+router.post("/add", auth, trimBody, async (req, res) => {
     try {
         const { name, years, kind, need, image, location, description } = req.body;
         await animalService.addAnimal({ name, years, kind, need, image, location, description, owner: req.user._id });
@@ -50,7 +51,7 @@ router.get("/:animalId/edit", auth, isAnimalCreator, async (req, res) => {
     }
 });
 
-router.post("/:animalId/edit", auth, isAnimalCreator, async (req, res) => {
+router.post("/:animalId/edit", auth, isAnimalCreator, trimBody, async (req, res) => {
     const animal = req.body;
     try {
         const animalId = req.params.animalId;
@@ -88,7 +89,7 @@ router.get("/:animalId/donate", auth, async (req, res) => {
     }
 });
 
-router.get("/search", auth, async (req, res) => {
+router.get("/search", auth, trimBody, async (req, res) => {
     try {
         const location = req.query.location;
         const animals = await animalService.getAllAnimals(location);
