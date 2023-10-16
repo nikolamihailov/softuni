@@ -29,10 +29,14 @@
           {{else}}
             {{#if canBuy}}
               <!-- Logged in user who has not yet buy this game code-->
-              <!-- <a href="#" class="btn-buy">Buy</a> -->
+              <a
+                href="/games/{{game._id}}/buy"
+                class="btn-buy"
+              >Buy</a>
             {{else}}
               <!-- Logged in user who has already buy this game code-->
-              <!-- <p class="buy-message">You have already bought this game</p> -->
+              <p class="buy-message">You have already bought
+                this game</p>
             {{/if}}
           {{/if}}
         {{/if}}

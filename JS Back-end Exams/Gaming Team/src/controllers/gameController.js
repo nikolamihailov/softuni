@@ -33,7 +33,21 @@ router.get("/:gameId/details", async (req, res) => {
         const gameId = req.params.gameId;
         const game = await gameService.getGameById(gameId);
         const isCreator = req.user?._id === game.owner.toString();
-        res.render("game/details", { title: `${game.name} details`, game, isCreator });
+        const canBuy = !isCreator && !game.boughtBy.some(g => g._id.toString() === req.user._id);
+        res.render("game/details", { title: `${game.name} details`, game, isCreator, canBuy });
+    } catch (error) {
+        res.redirect("/error-404-page");
+    }
+});
+
+router.get("/:gameId/buy", auth, async (req, res) => {
+    try {
+        const gameId = req.params.gameId;
+        const game = await gameService.getGameById(gameId);
+        if (req.user._id !== game.owner.toString()) {
+            await gameService.buyGame(gameId, req.user._id);
+            res.redirect(`/games/${game._id}/details`);
+        }
     } catch (error) {
         res.redirect("/error-404-page");
     }
