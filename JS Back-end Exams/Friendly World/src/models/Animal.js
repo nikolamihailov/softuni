@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const animalSchema = mongoose.Schema({
+const animalSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Name is required!"],
