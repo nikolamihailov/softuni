@@ -1,49 +1,32 @@
-.full-screen {
-  background-color: #081f27;
+#errorPage {
   width: 100%;
-  margin-top: 3em;
-  height: 530px;
-  color: white;
-  font-family: "Arial Black";
-  text-align: center;
+  height: 100vh;
+  background-image: url(../images/errorImage.png);
+  background-position: center;
+  background-size: cover;
 }
 
-.con-not-found {
-  padding-top: 2em;
-  padding: auto;
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-  margin: 0 auto;
+.not-found-page-container {
+    position: absolute;
+    margin-top: 33%;
+    margin-left: 37%;
 }
 
-.con-not-found .voldemor-img img {
-    width: 100%;
-}
-
-.error-num{
-    font-size:100px;
-}
-
-.con-not-found  p {
-  margin-bottom: 2em;
-  margin-top: 1em;
-  font-size: 30px;
-  color: white;
-}
-
-.con-not-found .error-message > p > a {
-  color: #72a4ab;
+.not-found-page-container p a {
+  color: #2E87CB;
+  text-decoration: none;
   font-weight: bold;
+}
+
+.not-found-page-container p a:hover {
+  text-decoration: underline;
+}
+
+.not-found-page-container h2 {
   font-size: 30px;
-  font-variant: small-caps;
-  text-decoration: rgb(247, 218, 218);
+  margin-left: 60px;
 }
 
-.con-not-found .error-message > p > a:hover {
-  color: lightgray;
-}
-
-.error-message {
-    margin-top: 3em;
+.not-found-page-container > p {
+  margin-top: 1%;
 }
