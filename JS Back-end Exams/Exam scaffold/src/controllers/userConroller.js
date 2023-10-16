@@ -1,12 +1,13 @@
 const router = require("express").Router();
 const userService = require("../services/userService");
 const { extractErrors } = require("../utils/errorHelper");
+const { trimBody } = require("../middlewares/trimBody");
 
 router.get("/register", (req, res) => {
     res.render("user/register", { title: "Register" });
 });
 
-router.post("/register", async (req, res) => {
+router.post("/register", trimBody, async (req, res) => {
     try {
         const { firstName, lastName, email, password, repeatPassword } = req.body;
         const token = await userService.register({ firstName, lastName, email, password, repeatPassword });
@@ -23,7 +24,7 @@ router.get("/login", (req, res) => {
     res.render("user/login", { title: "Login" });
 });
 
-router.post("/login", async (req, res) => {
+router.post("/login", trimBody, async (req, res) => {
     try {
         const { email, password } = req.body;
         const token = await userService.login(email, password);
