@@ -11,7 +11,7 @@ router.get("/add", (req, res) => {
 router.post("/add", auth, trimBody, async (req, res) => {
     try {
         const { name, years, kind, need, image, location, description } = req.body;
-        await animalService.addAnimal({ name, years, kind, need, image, location, description, owner: req.user._id });
+        await animalService.addAnimal({ name, years: +years, kind, need, image, location, description, owner: req.user._id });
         res.redirect("/");
     } catch (error) {
         const animalData = req.body;

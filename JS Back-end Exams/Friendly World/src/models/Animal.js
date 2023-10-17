@@ -14,8 +14,12 @@ const animalSchema = new mongoose.Schema({
     years: {
         type: Number,
         required: [true, "Years is required!"],
-        min: [1, "Years must be at least 1!"],
-        max: [100, "Years must no more than 100!"],
+        validate: {
+            validator: function (value) {
+                return value >= 1 && value <= 100;
+            },
+            message: 'Years must be 1-100!'
+        }
     },
     image: {
         type: String,

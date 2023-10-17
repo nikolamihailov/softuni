@@ -21,7 +21,7 @@ router.get("/create", (req, res) => {
 router.post("/create", auth, trimBody, async (req, res) => {
     try {
         const { name, image, price, description, genre, platform } = req.body;
-        await gameService.createGame({ name, image, price, description, genre, platform, owner: req.user._id });
+        await gameService.createGame({ name, image, price: +price, description, genre, platform, owner: req.user._id });
         res.redirect("/games/all");
     } catch (error) {
         const errors = extractErrors(error);
