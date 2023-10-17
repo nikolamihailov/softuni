@@ -35,13 +35,13 @@ router.get("/:postId/details", async (req, res) => {
         const post = await postService.getPostById(postId);
         const votes = post.votes.length;
         const voters = post.votes.map(p => p.email).join(", ");
+        const author = post.owner.firstName + " " + post.owner.lastName;
         if (req.user) {
-            const author = req.user.firstName + " " + req.user.lastName;
-            const isAuthor = req.user._id === post.owner.toString();
+            const isAuthor = req.user._id === post.owner._id.toString();
             const canVote = !isAuthor && !post.votes.some(v => v._id.toString() === req.user._id);
             res.render("post/details", { title: `${post.name} details`, post, author, isAuthor, canVote, votes, voters });
         } else {
-            res.render("post/details", { title: `${post.name} details`, post, votes, voters });
+            res.render("post/details", { title: `${post.name} details`, post, author, votes, voters });
         }
     } catch (error) {
         res.redirect("/error-404-page");
@@ -96,8 +96,6 @@ router.get("/my-posts", auth, async (req, res) => {
         const userId = req.user._id;
         const posts = await postService.getAllUserPosts(userId);
         const author = req.user.firstName + " " + req.user.lastName;
-        console.log(author);
-        console.log(posts);
         res.render("post/my-posts", { title: "Profile", posts, author });
     } catch (error) {
         res.redirect("/error-404-page");

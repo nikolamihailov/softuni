@@ -4,7 +4,7 @@ exports.createPost = (postData) => Creature.create(postData);
 
 exports.getAllPosts = () => Creature.find().lean();
 
-exports.getPostById = (postId) => Creature.findById(postId).populate("votes").lean();
+exports.getPostById = (postId) => Creature.findById(postId).populate("votes").populate("owner").lean();
 
 exports.updatePost = (postId, postData) => Creature.findByIdAndUpdate(postId, postData, { runValidators: true });
 
