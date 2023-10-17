@@ -12,4 +12,4 @@ exports.updateBook = (bookId, bookData) => Book.findByIdAndUpdate(bookId, bookDa
 
 exports.deleteBook = (bookId) => Book.findByIdAndDelete(bookId);
 
-exports.getWishListBooks = (bookId) => Book.findById(bookId).populate("wishingList").lean();
+exports.getWishListBooks = (userId) => Book.find({ wishingList: { $in: [userId] } }).lean();

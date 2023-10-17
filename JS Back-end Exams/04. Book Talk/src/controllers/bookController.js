@@ -88,7 +88,9 @@ router.get("/:bookId/delete", auth, isBookOwner, async (req, res) => {
 
 router.get("/wish-list", auth, async (req, res) => {
     try {
-
+        const { _id: userId, email } = req.user;
+        const books = await bookService.getWishListBooks(userId);
+        res.render("book/wishlist", { title: "My profile", books, email });
     } catch (error) {
         res.redirect("/error-404-page");
     }
@@ -96,4 +98,4 @@ router.get("/wish-list", auth, async (req, res) => {
 
 
 
-module.exports = router;;;
+module.exports = router;
