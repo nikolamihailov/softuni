@@ -1,64 +1,43 @@
 <html lang="en">
-
   <head>
     <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
     <title>
       {{#if title}}
         {{title}}
       {{else}}
-        Wizard Creatures Wiki
+        Book store
       {{/if}}
     </title>
-
-    <!-- Do not forget to change the path to the css file -->
+    <link rel="stylesheet" href="/css/style.css" />
     <link
-      href="/css/style.css"
-      type="text/css"
       rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
     />
   </head>
-
   <body>
-
-    <div id="box">
-
-      <!-- In case of error, you should display div with class "error-container" -->
-      <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-      <!---->
-      {{#if errors}}
-        <div class="error-container">
-          {{#each errors}}
-            <p>{{this}}</p>
-          {{/each}}
-        </div>
-      {{/if}}
-
-      <nav>
-        <!-- Do not forget to change the path to the image -->
-        <img src="/img/logo.png" alt="logo" />
-
-        <ul class="menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/posts/all">All Posts</a></li>
+    <header class="header">
+      <div class="header">
+        <nav class="navbar">
+          <a href="/">Home</a>
+          <a href="/books/all">Catalog</a>
           {{#if isAuthenticated}}
-            <!-- Logged users -->
-            <li><a href="/posts/create">Create Post</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/users/logout">Logout</a></li>
+            <!--Only for logged user-->
+            <a href="/books/wish-list">Profile</a>
+            <a href="/books/create">Create Review</a>
+            <a href="/users/logout">Logout</a>
           {{else}}
-            <!-- Guest users -->
-            <li><a href="/users/register">Register</a></li>
-            <li><a href="/users/login">Login</a></li>
+            <!--Only for guest-->
+            <a href="/users/login">Login</a>
+            <a href="/users/register">Register</a>
           {{/if}}
-        </ul>
-
-      </nav>
-      {{{body}}}
-      <footer>
-        © JS Back-End Exam 2023
-      </footer>
-    </div>
-
+        </nav>
+      </div>
+    </header>
+    {{{body}}}
   </body>
-
 </html>

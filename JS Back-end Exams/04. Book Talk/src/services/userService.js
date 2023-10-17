@@ -4,9 +4,9 @@ const jwt = require("../lib/jwt");
 const { SECRET } = require("../constants");
 
 exports.register = async (userData) => {
-    const { firstName, lastName, email } = userData;
+    const { username, email } = userData;
     const user = await User.create(userData);
-    const payload = { _id: user._id, firstName, lastName, email };
+    const payload = { _id: user._id, username, email };
     const token = await jwt.sign(payload, SECRET, { expiresIn: "1d" });
     return token;
 };
@@ -20,7 +20,7 @@ exports.login = async (email, password) => {
 
     if (!isPassCorrect) throw new Error("Invalid email or password");
 
-    const payload = { _id: user._id, email, firstName: user.firstName, lastName: user.lastName };
+    const payload = { _id: user._id, email, username: user.username };
     const token = await jwt.sign(payload, SECRET, { expiresIn: "1d" });
     return token;
 };

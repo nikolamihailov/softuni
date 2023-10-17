@@ -167,12 +167,13 @@ html::-webkit-scrollbar-thumb {
   box-shadow: 0 5px 10px black;
 }
 
-.errorContainer>p {
+.errorContainer > p {
   background: #219150;
   font-size: 20px;
   padding: 20px;
   height: auto;
   border-radius: 20px;
+  margin-bottom: 8px;
 }
 
 .errorContainer {
@@ -189,18 +190,18 @@ html::-webkit-scrollbar-thumb {
 
 @keyframes cssAnimation {
   to {
-      width: 0;
-      height: 0;
-      overflow: hidden;
-      padding: 0;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
   }
 }
 
 @-webkit-keyframes cssAnimation {
   to {
-      width: 0;
-      height: 0;
-      visibility: hidden;
-      padding: 0;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    padding: 0;
   }
 }
