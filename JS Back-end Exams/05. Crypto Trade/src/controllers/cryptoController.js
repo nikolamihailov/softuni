@@ -1,5 +1,6 @@
 const { auth, isOfferOwner } = require("../middlewares/authMiddleware");
 const { trimBody } = require("../middlewares/trimBody");
+const { trimQuery } = require("../middlewares/trimQuery");
 const { extractErrors } = require("../utils/errorHelper");
 const cryptoService = require("../services/cryptoService");
 const { getOptions } = require("../utils/dropdownHelper");
@@ -93,14 +94,13 @@ router.get("/:cryptoId/delete", auth, isOfferOwner, async (req, res) => {
     }
 });
 
-router.get("/search", auth, async (req, res) => {
+router.get("/search", auth, trimQuery, async (req, res) => {
     try {
         const { name, payment } = req.query;
         const offers = await cryptoService.getAllOffers(name, payment);
         res.render("crypto/search", { title: "Search page", offers });
     } catch (error) {
         res.redirect("/error-404-page");
-
     }
 });
 
