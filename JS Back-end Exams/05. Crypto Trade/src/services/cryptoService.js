@@ -1,6 +1,17 @@
 const Crypto = require("../models/Crypto");
 
-exports.getAllOffers = () => Crypto.find().lean();
+exports.getAllOffers = (name, payment) => {
+    const query = {};
+    if (name) {
+        query.name = new RegExp(name, "i");
+    }
+
+    if (payment) {
+        query.payment = payment;
+    }
+
+    return Crypto.find(query).lean();
+};
 
 exports.createOffer = (cryptoData) => Crypto.create(cryptoData);
 

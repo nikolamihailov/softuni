@@ -10,6 +10,7 @@ router.get("/all", async (req, res) => {
         const offers = await cryptoService.getAllOffers();
         res.render("crypto/catalog", { title: "All Crypto", offers });
     } catch (error) {
+        console.log(1);
         res.redirect("/error-404-page");
     }
 });
@@ -89,6 +90,17 @@ router.get("/:cryptoId/delete", auth, isOfferOwner, async (req, res) => {
         res.redirect("/cryptos/all");
     } catch (error) {
         res.redirect("/error-404-page");
+    }
+});
+
+router.get("/search", auth, async (req, res) => {
+    try {
+        const { name, payment } = req.query;
+        const offers = await cryptoService.getAllOffers(name, payment);
+        res.render("crypto/search", { title: "Search page", offers });
+    } catch (error) {
+        res.redirect("/error-404-page");
+
     }
 });
 
