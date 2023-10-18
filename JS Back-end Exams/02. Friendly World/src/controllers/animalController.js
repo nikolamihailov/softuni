@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { auth, isAnimalCreator } = require("../middlewares/authMiddleware");
 const { trimBody } = require("../middlewares/trimBody");
+const { trimQuery } = require("../middlewares/trimQuery");
 const animalService = require("../services/animalService");
 const { extractErrors } = require("../utils/errorHelper");
 
@@ -77,7 +78,7 @@ router.get("/:animalId/donate", auth, async (req, res) => {
     try {
         const animalId = req.params.animalId;
         const animal = await animalService.getAnimalById(animalId);
-        if (req.user.id !== animal.owner.toString()) {
+        if (req.user._id !== animal.owner.toString()) {
             await animalService.donateToAnimal(animalId, req.user._id);
             console.log(animal);
             res.redirect(`/animals/${animalId}/details`);
@@ -89,7 +90,7 @@ router.get("/:animalId/donate", auth, async (req, res) => {
     }
 });
 
-router.get("/search", auth, trimBody, async (req, res) => {
+router.get("/search", auth, trimQuery, async (req, res) => {
     try {
         const location = req.query.location;
         const animals = await animalService.getAllAnimals(location);

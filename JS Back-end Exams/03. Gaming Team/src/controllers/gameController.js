@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const { auth, isGameOwner } = require("../middlewares/authMiddleware");
 const { trimBody } = require("../middlewares/trimBody");
+const { trimQuery } = require("../middlewares/trimQuery");
 const gameService = require("../services/gameService");
 const { getOptions } = require("../utils/dropdownHelper");
 const { extractErrors } = require("../utils/errorHelper");
@@ -89,7 +90,7 @@ router.get("/:gameId/delete", auth, isGameOwner, async (req, res) => {
     }
 });
 
-router.get("/search", auth, trimBody, async (req, res) => {
+router.get("/search", auth, trimQuery, async (req, res) => {
     try {
         const { name, platform } = req.query;
         const games = await gameService.getAllGames(name, platform);

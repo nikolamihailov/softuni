@@ -45,9 +45,13 @@ router.get("/:bookId/details", async (req, res) => {
 router.get("/:bookId/add-to-wishlist", auth, async (req, res) => {
     try {
         const bookId = req.params.bookId;
-        const userId = req.user._id;
-        await bookService.addBookToWishlist(bookId, userId);
-        res.redirect(`/books/${bookId}/details`);
+        const book = await bookService.findBookById(bookId);
+        if (req.user._id !== book.owner.toString()) {
+            await bookService.addBookToWishlist(bookId, req.user._id);
+            res.redirect(`/books/${bookId}/details`);
+        } else {
+            return res.redirect("/error-404-page");
+        }
     } catch (error) {
         res.redirect("/error-404-page");
     }
