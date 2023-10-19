@@ -4,11 +4,14 @@ const bcrypt = require("bcrypt");
 const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
-        required: [true, "First name is required!"]
+        required: [true, "First name is required!"],
+        minLength: [1, "First name should be at least 1 char!"]
     },
     lastName: {
         type: String,
-        required: [true, "Last name is required"]
+        required: [true, "Last name is required"],
+        minLength: [2, "Last name should be at least 1 char!"]
+
     },
     email: {
         type: String,
@@ -21,10 +24,17 @@ const userSchema = new mongoose.Schema({
             },
             message: 'Email already exists!',
         },
+        validate: {
+            validator: function (value) {
+                return /^[a-zA-Z]+@[a-zA-Z]+\.[a-zA-Z]+$/.test(value);
+            },
+            message: 'Invalid email format. The email should be in the format: <name>@<domain>.<extension>',
+        },
     },
     password: {
         type: String,
-        required: [true, "Password is required!"]
+        required: [true, "Password is required!"],
+        minLength: [5, "Password should be at least 5 chars!"]
     },
 });
 

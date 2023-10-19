@@ -1,30 +1,44 @@
 <main>
-  <section id="home">
-    <div class="home-container">
-      <div class="short-info">
-        <h1>START YOUR ADVENTURE TODAY!</h1>
-        <h2>
-          Everything you need to know about Harry Potter and
-          the magical world.
-        </h2>
+
+  <!-- In case of error, display the following div-->
+  <!--
+
+            <div class="error-box">
+                <p>Show each error in a separate paragraph</p>
+            </div>
+
+            -->
+
+  <!-- Home Page -->
+  <section id="catalog-section">
+
+    <h1 class="item">Home</h1>
+
+    <div class="item">
+
+      <div class="layout left med">
+        <div class="col">
+          <img src="/assets/splash.jpg" class="img-med">
+        </div>
+
+        <div class="content pad-med">
+          <p>Welcome to the online Auction House.</p>
+          <p>Buy and sell items in categories Real Estate, Vehicles, Furniture, Electronics and
+            Others. Browse available items and place your bid. Create a new listing and collect the
+            highest offer.
+          </p>
+
+          <div class="align-center">
+            <a class="action" href="#">Browse Listings</a>
+            {{#if isAuthenticated}}
+            <a class="action" href="#">Publish Auction</a>
+            {{/if}}
+          </div>
+        </div>
       </div>
+
     </div>
+
   </section>
 
-  <section id="home-page">
-    <div class="offers">
-      <div class="col container">
-        <img src="/img/Niffler.webp" alt="Niffler" />
-      </div>
-      <div class="col container">
-        <img src="/img/Demiguise.webp" alt="Demiguise" />
-      </div>
-      <div class="col container">
-        <img src="/img/Hippogriff.jpg" alt="Hippogriff" />
-      </div>
-      <div class="col container">
-        <img src="/img/Basilisk.jpg" alt="Basilisk" />
-      </div>
-    </div>
-  </section>
 </main>
