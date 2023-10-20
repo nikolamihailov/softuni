@@ -1,0 +1,57 @@
+<main>
+
+    <!-- In case of error, display the following div-->
+    {{#if errors}}
+    {{#each errors}}
+    <div class="error-box">
+        <p>{{this}}</p>
+    </div>
+    {{/each}}
+    {{/if}}
+
+    <!-- Edit Page -->
+    <section id="create-section">
+
+        <h1 class="item">Edit Auction</h1>
+
+        <div class="item padded align-center">
+
+            <form class="layout left large" method="POST">
+
+                <div class="col aligned">
+                    <label>
+                        <span>Title</span>
+                        <input type="text" name="title" value="{{auction.title}}"></label>
+                    <label>
+                        <span>Category</span>
+                        <select name="category">
+                            {{#each options}}
+                            <option value="{{value}}" {{#if selected}}selected{{/if}}>{{title}}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                    <label>
+                        <span>Image URL</span>
+                        <input type="text" name="image" value="{{auction.image}}"></label>
+                    <label>
+                        <span>Starting price</span>
+                        <input type="number" name="price" value="{{auction.price}}" {{#if
+                            auction.bidder}}readonly{{/if}}></label>
+                </div>
+
+                <div class="content pad-med align-center vertical">
+                    <label>
+                        <span>Description</span>
+                        <textarea name="description">{{auction.description}}</textarea>
+                    </label>
+
+                    <div class="align-center">
+                        <input class="action" type="submit" value="Update Listing">
+                    </div>
+                </div>
+
+            </form </div>
+
+    </section>
+
+</main>

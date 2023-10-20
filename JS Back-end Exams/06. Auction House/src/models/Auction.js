@@ -36,7 +36,8 @@ const auctionSchema = new mongoose.Schema({
     author: {
         type: mongoose.Types.ObjectId,
         ref: "User"
-    }
+    },
+    isClosed: Boolean
 });
 
 const Auction = mongoose.model("Auction", auctionSchema);
