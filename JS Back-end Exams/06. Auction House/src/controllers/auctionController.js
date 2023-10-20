@@ -11,7 +11,7 @@ router.get("/all", async (req, res) => {
         const auctions = await auctionService.getAllAuctions();
         res.render("auction/browse", { title: "Browse Auctions", auctions });
     } catch (error) {
-        console.log(error);
+        res.redirect("/error-404-page");
     }
 });
 
