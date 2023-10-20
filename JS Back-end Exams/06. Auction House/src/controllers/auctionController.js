@@ -61,7 +61,7 @@ router.get("/:auctionId/details", async (req, res) => {
     }
 });
 
-router.post("/:auctionId/bid", auth, async (req, res) => {
+router.post("/:auctionId/bid", auth, trimBody, async (req, res) => {
     try {
         const auction = await auctionService.getAuctionById(req.params.auctionId);
         if (req.user._id !== auction.author._id.toString()) {
@@ -99,7 +99,7 @@ router.get("/:auctionId/edit", auth, isAuctionPublisher, async (req, res) => {
     }
 });
 
-router.post("/:auctionId/edit", auth, isAuctionPublisher, async (req, res) => {
+router.post("/:auctionId/edit", auth, isAuctionPublisher, trimBody, async (req, res) => {
     try {
         await auctionService.updateAuction(req.params.auctionId, { ...req.body });
         res.redirect(`/auctions/${req.params.auctionId}/details`);
