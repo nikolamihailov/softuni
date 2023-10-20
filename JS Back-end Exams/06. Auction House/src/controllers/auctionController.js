@@ -41,6 +41,9 @@ router.get("/:auctionId/details", async (req, res) => {
         const auction = await auctionService.getAuctionById(req.params.auctionId);
         const author = auction.author.firstName + " " + auction.author.lastName;
         const isPublisher = req.user?._id === auction.author._id.toString();
+        const isTopBidder = req.user?._id === auction.bidder?._id.toString();
+
+
         if (isPublisher) {
             res.render("auction/details-owner", {
                 title: `${auction.title ? auction.title : "Auction"} details`,
@@ -52,6 +55,7 @@ router.get("/:auctionId/details", async (req, res) => {
                 title: `${auction.title ? auction.title : "Auction"} details`,
                 auction,
                 author,
+                isTopBidder
             });
         }
     } catch (error) {
@@ -64,17 +68,16 @@ router.post("/:auctionId/bid", auth, async (req, res) => {
         const auction = await auctionService.getAuctionById(req.params.auctionId);
         if (req.user._id !== auction.author._id.toString()) {
             const { bidAmount } = req.body;
-            if (+bidAmount > auction.bidder.price) {
-                auction.bidder.price = +bidAmount;
-                await auction.save();
+            if (+bidAmount > auction.price) {
+                await auctionService.updateAuction(req.params.auctionId, { bidder: req.user._id, price: +bidAmount });
+                res.redirect(`/auctions/${req.params.auctionId}/details`);
             } else {
-                res.render(`/auctions/${req.params.auctionId}/details`,
-                    {
-                        title: `${auction.title ? auction.title : "Auction"} details`,
-                        errors: ["You cannot"]
-                    });
+                res.render("auction/details", {
+                    auction,
+                    title: `${auction.title ? auction.title : "Auction"} details`,
+                    errors: ["You cannot bid lower than the current price!"]
+                });
             }
-            console.log(bidAmount);
         } else {
             return res.redirect("/error-404-page");
 
