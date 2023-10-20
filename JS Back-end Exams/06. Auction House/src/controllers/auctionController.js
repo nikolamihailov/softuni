@@ -73,12 +73,10 @@ router.post("/:auctionId/bid", auth, trimBody, async (req, res) => {
                 res.render("auction/details", {
                     auction,
                     title: `${auction.title ? auction.title : "Auction"} details`,
-                    errors: ["You cannot bid lower than the current price!"]
+                    errors: ["You cannot bid lower or the same as the current price!"]
                 });
             }
-        } else {
-            return res.redirect("/error-404-page");
-        }
+        } else return res.redirect("/error-404-page");
     } catch (error) {
         res.redirect("/error-404-page");
     }
