@@ -3,11 +3,11 @@
   <!-- In case of error, display the following div-->
 
   {{#if errors}}
+  {{#each errors}}
   <div class="error-box">
-    {{#each errors}}
     <p>{{this}}</p>
-    {{/each}}
   </div>
+  {{/each}}
   {{/if}}
 
   <!-- Login Page -->

@@ -1,0 +1,36 @@
+<main>
+
+    <!-- In case of error, display the following div-->
+    {{#if errors}}
+    <div class="error-box">
+        {{#each errors}}
+        <p>{{this}}</p>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    <!-- Browse Page -->
+    <section id="catalog-section" class="spaced">
+
+        <h1 class="item">Auctions</h1>
+
+        {{#if auctions}}
+        <!-- List of available auctions -->
+        <ul class="catalog cards">
+            {{#each auctions}}
+            {{>auction}}
+            {{/each}}
+        </ul>
+        {{else}}
+        <!-- If there are no auctions to display -->
+        <div class="item pad-large align-center">
+            <p>Nothing has been listed yet. Be the first!</p>
+            <div>
+                <a class="action" href="/auctions/publish">Publish Auction</a>
+            </div>
+        </div>
+        {{/if}}
+
+    </section>
+
+</main>

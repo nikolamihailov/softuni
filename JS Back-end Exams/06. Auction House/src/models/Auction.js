@@ -17,7 +17,6 @@ const auctionSchema = new mongoose.Schema({
     },
     image: {
         type: String,
-        required: [true, "Image is required!"],
         match: [/^https?:\/\/.+/, "Provide valid creature image link!"]
     },
     price: {
@@ -32,7 +31,7 @@ const auctionSchema = new mongoose.Schema({
     },
     bidder: {
         type: mongoose.Types.ObjectId,
-        ref: "User"
+        ref: "User",
     },
     author: {
         type: mongoose.Types.ObjectId,
