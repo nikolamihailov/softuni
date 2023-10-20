@@ -4,7 +4,7 @@ exports.publishAuction = (auctionData) => Auction.create(auctionData);
 
 exports.getAllAuctions = () => Auction.find({ isClosed: false }).lean();
 
-exports.getAllClosedAuctions = (userId) => Auction.find({ isClosed: true, author: userId }).lean();
+exports.getAllClosedAuctions = (userId) => Auction.find({ isClosed: true, author: userId }).populate("bidder").lean();
 
 exports.getAuctionById = (auctionId) => Auction.findById(auctionId).populate(["author", "bidder"]).lean();
 
