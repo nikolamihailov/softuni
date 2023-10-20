@@ -21,18 +21,18 @@
 
             <li class="item">
                 <header class="pad-med">
-                    <h2>Fishing Boat</h2>
+                    <h2>{{this.title}}</h2>
                 </header>
 
                 <div class="align-center">
 
-                    <img class="img-thumb" src="/static/assets/boat.jpg">
+                    <img class="img-thumb" src="{{image}}">
 
                 </div>
 
                 <footer class="align-center pad-med">
-                    <p>Closing price: <strong>$5500</strong></p>
-                    from John Maclane
+                    <p>Closing price: <strong>${{price}}</strong></p>
+                    from {{bidder.firstName}} {{bidder.lastName}}
                 </footer>
             </li>
             {{/each}}

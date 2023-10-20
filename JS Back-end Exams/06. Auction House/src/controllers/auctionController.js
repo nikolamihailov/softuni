@@ -126,9 +126,20 @@ router.get("/:auctionId/delete", auth, isAuctionPublisher, async (req, res) => {
     }
 });
 
+router.get("/:auctionId/close", auth, isAuctionPublisher, async (req, res) => {
+    try {
+
+        await auctionService.updateAuction(req.params.auctionId, { isClosed: true });
+        res.redirect("/auctions/closed");
+    } catch (error) {
+        res.redirect("/error-404-page");
+    }
+});
+
 router.get("/closed", auth, async (req, res) => {
     try {
         const auctions = await auctionService.getAllClosedAuctions(req.user._id);
+        console.log(auctions);
         res.render("auction/closed-auctions", { title: "Closed Auctions", auctions });
     } catch (error) {
         res.redirect("/error-404-page");
