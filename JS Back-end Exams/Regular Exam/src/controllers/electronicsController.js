@@ -124,8 +124,4 @@ router.get("/search", auth, trimQuery, async (req, res) => {
     }
 });
 
-
-
-
-
 module.exports = router;
