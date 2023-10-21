@@ -5,7 +5,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/error-404-page", (req, res) => {
-    res.render("404");
+    res.status(404).render("404", { title: "Error Page" });
 });
 
 module.exports = router;

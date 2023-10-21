@@ -1,101 +1,77 @@
-.home-container {
-    display: flex;
-    top: 0%;
-    left: 50%;
-    width: 100%;
-    text-align: center;
+.introduction {
+  text-align: left;
+  width: 52%;
+  margin-top: 9%;
+  margin-left: 3%;
 }
 
-.short-info {
-    justify-items: legacy;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    flex: 1;
-    margin-top: 2em;
-    padding: 3em;
-    width: 100%;
-    height: 30%;
-    background-color: #22333B;
-    border-radius: 50px;
+.introduction h1 {
+  color: white;
+  letter-spacing: 5px;
+  font-size: 50px;
+  text-align: center;
 }
 
-.short-info>h1 {
-    text-transform: capitalize;
-    font-size: 3.7rem;
-    font-weight: 600;
-    line-height: 1.1;
-    color: #ffffff !important;
-    font-family: Ubuntu, sans-serif !important;
-    pointer-events: auto;
-    word-wrap: break-word;
-    position: relative;
-    font-weight: bold;
-    word-wrap: break-word;
-    padding-left: 1em;
-    margin-bottom: 15px;
+.introduction p {
+  color: white;
+  font-size: 20px;
+  text-align: center;
 }
 
-.short-info>h2 {
-    text-transform: capitalize;
-    font-size: 1.8rem;
-    font-weight: 600;
-    line-height: 1.1;
-    color: #fffefe !important;
-    font-family: Ubuntu, sans-serif !important;
-    pointer-events: auto;
-    word-wrap: break-word;
-    position: relative;
-    font-weight: bold;
-    word-wrap: break-word;
-    padding-left: 1em;
+.errorContainer {
+  margin-top: 2%;
+  position: fixed;
+  right: 100px;
+  min-width: 100px;
+  display: block;
+  z-index: 11111;
+  top: 55px;
+  text-align: center;
+  border-radius: 20px;
+  color: black;
+  font-weight: bold;
+  height: auto;
+  width: 20%;
+  box-shadow: 0 5px 10px black;
 }
 
-#home-page {
-    display: block;
-    justify-content: space-around;
-    align-items: center;
-    bottom: 0;
-    margin-top: 4em;
-    margin-left: 0%;
-    margin-right: 0%;
-    min-height: 350px;
-    font-size: 20px;
-    width: 100%;
-    text-align: center;
+.errorContainer > p {
+  background: black;
+  color: white;
+  margin: 0;
+  font-size: 20px;
+  padding: 30px;
+  height: auto;
+  border-radius: 20px;
+  margin-bottom: 15px;
 }
 
-#home-page>h1 {
-    font-size: 2.4rem;
-    position: relative;
-    font-weight: 700;
-    line-height: 1.1;
+.errorContainer {
+  -moz-animation: cssAnimation 0s ease-in 2s forwards;
+  /* Firefox */
+  -webkit-animation: cssAnimation 0s ease-in 2s forwards;
+  /* Safari and Chrome */
+  -o-animation: cssAnimation 0s ease-in 2s forwards;
+  /* Opera */
+  animation: cssAnimation 0s ease-in 2s forwards;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    overflow: hidden;
     padding: 0;
-    letter-spacing: 0px;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    color: rgb(234, 236, 250);
-    margin-top: 50px;
-    font-size: 4.5rem;
-    font-family: "Playfair Display", serif
+  }
 }
 
-.offers {
-    font-size: 0;
-    flex-wrap: wrap;
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.container {
-    margin-top: 15px;
-    box-shadow: 0px 3px 8px 5px white;
-    height: 100%;
-}
-
-.container>img {
-    display: inline-block;
-    border: 2px solid rgb(253, 251, 251);
-    height: 250px;
-    width: 330px;
-    max-width: 100%;
+@-webkit-keyframes cssAnimation {
+  to {
+    width: 0;
+    height: 0;
+    visibility: hidden;
+    padding: 0;
+  }
 }

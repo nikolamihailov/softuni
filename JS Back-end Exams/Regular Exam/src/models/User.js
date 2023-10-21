@@ -2,17 +2,15 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
-    firstName: {
+    username: {
         type: String,
-        required: [true, "First name is required!"]
-    },
-    lastName: {
-        type: String,
-        required: [true, "Last name is required"]
+        required: [true, "Username is required!"],
+        minLength: [3, "Username must be at least 3 characters!"]
     },
     email: {
         type: String,
         required: [true, "Email is required!"],
+        minLength: [10, "Email must be at least 10 characters!"],
         unique: true,
         validate: {
             validator: async function (email) {
@@ -24,11 +22,12 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: [true, "Password is required!"]
+        required: [true, "Password is required!"],
+        minLength: [4, "Password must be at least 4 characters!"]
     },
 });
 
-userSchema.virtual("repeatPassword").set(function (val) {
+userSchema.virtual("rePassword").set(function (val) {
     if (val !== this.password) throw new Error("Passwords mismatched!");
 });
 

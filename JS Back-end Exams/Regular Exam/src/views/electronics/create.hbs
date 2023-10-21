@@ -1,0 +1,43 @@
+<section id="createPage">
+    <form id='createForm' action="/electronics/create" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Name..." value="{{electronics.name}}">
+
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type" placeholder="Type..." value="{{electronics.type}}">
+
+        <label for="production">Year of Production:</label>
+        <input type="number" id="production" name="production" placeholder="Year of Production..."
+            value="{{electronics.production}}">
+
+        <label for="exploitation">Years of Exploitation:</label>
+        <input type="number" id="exploitation" name="exploitation" placeholder="Year of Exploitation..."
+            value="{{electronics.exploitation}}">
+
+        <label for="damages">Damages:</label>
+        <input type="text" id="damages" name="damages" placeholder="Damages..." value="{{electronics.damages}}">
+
+        <label for="image">Image:</label>
+        <input type="text" id="image" name="image" placeholder="Image..." value="{{electronics.image}}">
+        <img id="offerImage" src="{{#if electronics.image}}{{electronics.image}}{{else}}/image/no-image.jpg{{/if}}"
+            alt="{{electronics.name}}" style="width: 90px; height: 90px;margin: 0 auto; display: block">
+
+        <label for="price">Price:</label>
+        <input type="number" id="price" name="price" placeholder="Price..." value="{{electronics.price}}">
+
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" placeholder="Description..."
+            value="{{electronics.description}}">
+
+        <input type="submit" class="create" value="Create Offer">
+    </form>
+</section>
+
+<script>
+    const imageUrlInput = document.getElementById('image');
+    const offerImage = document.getElementById('offerImage');
+    imageUrlInput.addEventListener('input', function () {
+        const imageUrl = imageUrlInput.value;
+        offerImage.src = imageUrl;
+    });
+</script>

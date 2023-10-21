@@ -1,64 +1,54 @@
+<!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <title>
-      {{#if title}}
-        {{title}}
-      {{else}}
-        Wizard Creatures Wiki
-      {{/if}}
-    </title>
+<head>
+  <meta charset="UTF-8">
+  <title>
+    {{#if title}}
+    {{title}}
+    {{else}}
+    Second Hand Electronics
+    {{/if}}
+  </title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
 
-    <!-- Do not forget to change the path to the css file -->
-    <link
-      href="/css/style.css"
-      type="text/css"
-      rel="stylesheet"
-    />
-  </head>
+<body>
+  <!-- In case of error, you should display div with class "errorContainer" -->
+  <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
 
-  <body>
-
-    <div id="box">
-
-      <!-- In case of error, you should display div with class "error-container" -->
-      <!-- You can choose to display the first error or all of them (error message/s in your opinion) -->
-      <!---->
-      {{#if errors}}
-        <div class="error-container">
-          {{#each errors}}
-            <p>{{this}}</p>
-          {{/each}}
-        </div>
-      {{/if}}
-
-      <nav>
-        <!-- Do not forget to change the path to the image -->
-        <img src="/img/logo.png" alt="logo" />
-
-        <ul class="menu">
-          <li><a href="/">Home</a></li>
-          <li><a href="/posts/all">All Posts</a></li>
-          {{#if isAuthenticated}}
-            <!-- Logged users -->
-            <li><a href="/posts/create">Create Post</a></li>
-            <li><a href="/profile">Profile</a></li>
-            <li><a href="/users/logout">Logout</a></li>
-          {{else}}
-            <!-- Guest users -->
-            <li><a href="/users/register">Register</a></li>
-            <li><a href="/users/login">Login</a></li>
-          {{/if}}
-        </ul>
-
-      </nav>
-      {{{body}}}
-      <footer>
-        © JS Back-End Exam 2023
-      </footer>
+  {{#if errors}}
+  <div>
+    <div class="errorContainer">
+      {{#each errors}}
+      <p>{{this}}</p>
+      {{/each}}
     </div>
+  </div>
+  {{/if}}
 
-  </body>
+  <div id="container">
+
+    <nav>
+      <ul>
+        <!--For all users-->
+        <li><a href="/">Home</a></li>
+        <li><a href="/electronics/all">Catalog</a></li>
+        {{#if isAuthenticated}}
+        <!--For loggin users-->
+        <li><a href="/electronics/create">Create Offer</a></li>
+        <li><a href="/electronics/search">Search</a></li>
+        <li><a href="/users/logout">Logout</a></li>
+        {{else}}
+        <!--For guest user-->
+        <li><a href="/users/login">Login</a></li>
+        <li><a href="/users/register">Register</a></li>
+        {{/if}}
+      </ul>
+    </nav>
+    {{{body}}}
+    <footer>@SoftUni - JS Back-End - Second Hand Electronics 2023</footer>
+  </div>
+</body>
 
 </html>

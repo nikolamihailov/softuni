@@ -1,76 +1,17 @@
-<main>
-  <section id="register-page">
-    <div class="signupSection">
-      <div class="info">
-        <h2>
-          "I hope you're pleased with yourselves. We could
-          all have been killed — or worse, expelled. Now if
-          you don't mind, I'm going to bed."
-        </h2>
-      </div>
-      <form method="POST" class="signupForm">
-        <h2>Sign Up</h2>
-        <ul class="noBullet">
-          <li>
-            <label for="first-name">First Name:</label>
-            <input
-              type="text"
-              class="inputFields"
-              id="first-name"
-              name="firstName"
-              value="{{userData.firstName}}"
-              placeholder="Alex"
-            />
-          </li>
-          <li>
-            <label for="last-name">Last Name:</label>
-            <input
-              type="text"
-              class="inputFields"
-              id="last-name"
-              name="lastName"
-              value="{{userData.lastName}}"
-              placeholder="Petkov"
-            />
-          </li>
-          <li>
-            <label for="email">Email:</label>
-            <input
-              type="text"
-              class="inputFields"
-              id="email"
-              name="email"
-              value="{{userData.email}}"
-              placeholder="alex@gmail.com"
-            />
-          </li>
-          <li>
-            <label for="password">Password:</label>
-            <input
-              type="password"
-              class="inputFields"
-              id="password"
-              name="password"
-              placeholder="******"
-            />
-          </li>
-          <li>
-            <label
-              for="repeat-password"
-            >Repeat-Password:</label>
-            <input
-              type="password"
-              class="inputFields"
-              id="repeat-password"
-              name="repeatPassword"
-              placeholder="******"
-            />
-          </li>
-          <li id="center-btn">
-            <button id="join-btn">JOIN</button>
-          </li>
-        </ul>
-      </form>
-    </div>
-  </section>
-</main>
+<section id="registerPage">
+  <form id='registerForm' action="/users/register" method="POST">
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email" placeholder="Email" value="{{userData.email}}">
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username" placeholder="Enter your Username" value="{{userData.username}}">
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" placeholder="Password">
+
+    <label for="rePassword">Repeat Password:</label>
+    <input type="password" id="rePassword" name="rePassword" placeholder="Repeat Password">
+
+    <input type="submit" class="register" value="Register">
+  </form>
+</section>
