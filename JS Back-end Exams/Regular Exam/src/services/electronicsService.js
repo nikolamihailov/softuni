@@ -1,24 +1,11 @@
 const Electronics = require("../models/Electronics");
 
 exports.getAllOffers = (name = "", type = "") => {
-    if (name && type) {
-        return Electronics.find({
-            $and: [
-                { name: new RegExp(name, "i") },
-                { type: new RegExp(type, "i") }
-            ]
-        }).lean();
-    }
-    if (name) return Electronics.find({ name: new RegExp(name, "i") }).lean();
-
-    if (type) return Electronics.find({ type: new RegExp(type, "i") }).lean();
-
-    return Electronics.find({
-        $and: [
-            { name: new RegExp(name, "i") },
-            { type: new RegExp(type, "i") }
-        ]
-    }).lean();
+    const query = {};
+    console.log(name, type);
+    if (name) query.name = new RegExp(name, "i");
+    if (type) query.type = new RegExp(type, "i");
+    return Electronics.find(query).lean();
 };
 
 exports.createOffer = (offerData) => Electronics.create(offerData);
