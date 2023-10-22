@@ -2,7 +2,6 @@ const Electronics = require("../models/Electronics");
 
 exports.getAllOffers = (name = "", type = "") => {
     const query = {};
-    console.log(name, type);
     if (name) query.name = new RegExp(name, "i");
     if (type) query.type = new RegExp(type, "i");
     return Electronics.find(query).lean();
