@@ -2,12 +2,13 @@ const router = require("express").Router();
 const userService = require("../services/userService");
 const { extractErrors } = require("../utils/errorHelper");
 const { trimBody } = require("../middlewares/trimBody");
+const { isIn } = require("../middlewares/authMiddleware");
 
-router.get("/register", (req, res) => {
+router.get("/register", isIn, (req, res) => {
     res.render("user/register", { title: "Register Page" });
 });
 
-router.post("/register", trimBody, async (req, res) => {
+router.post("/register", isIn, trimBody, async (req, res) => {
     try {
         const { username, email, password, rePassword } = req.body;
         const token = await userService.register({ username, email, password, rePassword });
@@ -20,11 +21,11 @@ router.post("/register", trimBody, async (req, res) => {
     }
 });
 
-router.get("/login", (req, res) => {
+router.get("/login", isIn, (req, res) => {
     res.render("user/login", { title: "Login Page" });
 });
 
-router.post("/login", trimBody, async (req, res) => {
+router.post("/login", isIn, trimBody, async (req, res) => {
     try {
         const { email, password } = req.body;
         const token = await userService.login(email, password);

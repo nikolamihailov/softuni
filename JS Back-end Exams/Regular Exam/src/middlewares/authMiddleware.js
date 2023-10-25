@@ -25,6 +25,11 @@ exports.auth = (req, res, next) => {
     next();
 };
 
+exports.isIn = (req, res, next) => {
+    if (req.user) return res.redirect("/");
+    next();
+};
+
 // check if the current logged user is the creator
 exports.isElectronicsOwner = async (req, res, next) => {
     const offerId = req.params.offerId;
