@@ -1,6 +1,6 @@
 # SoftUni - JavaSript path
 
-This repository is for tracking my progress of the modules that I am attempting.
+This repository is for tracking my progress of the modules that I am attempting. 
 
 ## Passed courses:
  - JS Basics
