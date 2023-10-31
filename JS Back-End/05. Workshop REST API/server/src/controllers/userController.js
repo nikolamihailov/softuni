@@ -9,8 +9,8 @@ router.post("/register", async (req, res) => {
 
         res.json({
             email: user.email,
-            authToken,
-            userId: user._id
+            accessToken,
+            _id: user._id
         });
     } catch (error) {
 
