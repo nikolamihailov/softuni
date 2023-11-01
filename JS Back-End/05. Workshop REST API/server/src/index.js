@@ -1,13 +1,15 @@
 const express = require("express");
-const routes = require("./routes");
-const cors = require("cors");
 const mongoose = require("mongoose");
+const cors = require("cors");
+const routes = require("./routes");
+const { auth } = require("./middlewares/authMiddleware");
 
 const app = express();
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+app.use(auth);
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/furniture-db")
