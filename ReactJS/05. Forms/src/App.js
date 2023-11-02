@@ -19,16 +19,16 @@ function App() {
     }, [values.username]);
 
     const onChangeHandler = (e) => {
-        setValues(state => ({...state, [e.target.name]: e.target.value}));
+        setValues(state => ({ ...state, [e.target.name]: e.target.value }));
     };
 
     const onSubmitHandler = (e) => {
-        e.preventDefault()
+        e.preventDefault();
     };
 
     const onHobbiesChange = (e) => {
         setHobbies(state => ({ ...state, [e.target.value]: e.target.checked }));
-    }
+    };
 
     return (
         <div className="App">
