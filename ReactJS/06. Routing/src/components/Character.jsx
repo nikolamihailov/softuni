@@ -13,7 +13,8 @@ const Character = () => {
       .then((data) => {
         setCharacter(data);
       });
-  }, []);
+  }, [id]);
+
   return (
     <div>
       <h2>Name: {character?.name}</h2>
