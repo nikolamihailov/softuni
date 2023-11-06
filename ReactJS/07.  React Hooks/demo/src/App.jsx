@@ -41,9 +41,40 @@ function App() {
       });
   }, []);
 
+  const onTodoClick = async (id) => {
+    const todo = todos.find((t) => t._id === id);
+
+    await fetch(`${URL}/${id}`, {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        ...todo,
+        isCompleted: !todo.isCompleted,
+      }),
+    });
+    setTodos((todos) =>
+      todos.map((t) =>
+        t._id === id
+          ? { ...t, isCompleted: !t.isCompleted }
+          : t
+      )
+    );
+  };
+
+  useEffect(() => {
+    fetch(URL)
+      .then((res) => res.json())
+      .then((data) => {
+        setTodos(Object.values(data));
+      });
+  }, []);
+
   const todoContext = {
     todos,
     onTodoDelete,
+    onTodoClick,
   };
 
   return (
