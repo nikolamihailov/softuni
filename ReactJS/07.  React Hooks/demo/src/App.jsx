@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Header from "./components/Header";
 import ToDoList from "./components/ToDoList";
 import AddToodModal from "./components/AddTodoModal";
+import { TodoContext } from "./contexts/todoContext";
 
 const URL = "http://localhost:3030/jsonstore/todos";
 function App() {
@@ -40,19 +41,22 @@ function App() {
       });
   }, []);
 
+  const todoContext = {
+    todos,
+    onTodoDelete,
+  };
+
   return (
     <>
-      <Header />
-      <ToDoList
-        todos={todos}
-        onAddTodoClick={onAddTodoClick}
-        onTodoDelete={onTodoDelete}
-      />
-      <AddToodModal
-        isAddTodoOpen={isAddTodoOpen}
-        onAddTodoClose={onAddTodoClose}
-        onAddTodoSubmit={onAddTodoSubmit}
-      />
+      <TodoContext.Provider value={todoContext}>
+        <Header />
+        <ToDoList onAddTodoClick={onAddTodoClick} />
+        <AddToodModal
+          isAddTodoOpen={isAddTodoOpen}
+          onAddTodoClose={onAddTodoClose}
+          onAddTodoSubmit={onAddTodoSubmit}
+        />
+      </TodoContext.Provider>
     </>
   );
 }

@@ -1,8 +1,11 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import ToDoItem from "./ToDoItem";
 import Button from "react-bootstrap/Button";
+import { useContext } from "react";
+import { TodoContext } from "../contexts/todoContext";
 
-function ToDoList({ todos, onAddTodoClick, onTodoDelete }) {
+function ToDoList({ onAddTodoClick }) {
+  const { todos } = useContext(TodoContext);
   return (
     <div
       style={{
@@ -14,11 +17,7 @@ function ToDoList({ todos, onAddTodoClick, onTodoDelete }) {
       <h1>ToDo List:</h1>
       <ListGroup as="ul">
         {todos.map((todo) => (
-          <ToDoItem
-            key={todo._id}
-            {...todo}
-            onTodoDelete={onTodoDelete}
-          />
+          <ToDoItem key={todo._id} {...todo} />
         ))}
       </ListGroup>
       <Button variant="primary" onClick={onAddTodoClick}>

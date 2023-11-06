@@ -1,7 +1,10 @@
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
+import { useContext } from "react";
+import { TodoContext } from "../contexts/todoContext";
 
-const ToDoItem = ({ _id, text, onTodoDelete }) => {
+const ToDoItem = ({ _id, text }) => {
+  const { onTodoDelete } = useContext(TodoContext);
   return (
     <ListGroup.Item
       as="li"
