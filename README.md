@@ -8,6 +8,6 @@ This repository is for tracking my progress of the modules that I am attempting.
  - JS Advanced
  - JS Applications
  - JS Back-End
+ - ReactJS
    
-## Courses that I am currently doing:
-- ReactJS
+
