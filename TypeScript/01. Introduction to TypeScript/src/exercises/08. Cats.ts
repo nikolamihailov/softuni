@@ -10,11 +10,11 @@ function cats(arr: string[]): string {
       return `${this.name}, age ${this.age} says Meow`;
     }
   }
-  const result: object[] = [];
+  const result: string[] = [];
   arr.forEach((el: string) => {
     const [name, age] = el.split(" ");
-    const cat: object = new Cat(name, Number(age));
-    result.push(cat);
+    const cat: Cat = new Cat(name, Number(age));
+    result.push(cat.meow());
   });
 
   return result.join("\n");
