@@ -1,6 +1,9 @@
 function findEvenPositionElement(arr: string[]): string {
-  return arr.map((el, idx) => idx % 2 == 0 && el).join(" ");
+  return arr
+    .map((el, idx) => (idx % 2 == 0 ? el : ""))
+    .filter((el) => el !== "")
+    .join(" ");
 }
 
-findEvenPositionElement(["20", "30", "40", "50", "60"]);
-findEvenPositionElement(["5", "10"]);
+console.log(findEvenPositionElement(["20", "30", "40", "50", "60"]));
+console.log(findEvenPositionElement(["5", "10"]));
