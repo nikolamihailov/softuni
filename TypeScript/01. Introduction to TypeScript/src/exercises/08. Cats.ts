@@ -20,4 +20,4 @@ function cats(arr: string[]): string {
   return result.join("\n");
 }
 
-cats(["Mellow 2", "Tom 5"]);
+console.log(cats(["Mellow 2", "Tom 5"]));
