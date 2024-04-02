@@ -21,3 +21,4 @@ function cats(arr: string[]): string {
 }
 
 console.log(cats(["Mellow 2", "Tom 5"]));
+console.log(cats(["Candy 1", "Poppy 3", "Nyx 2"]));
