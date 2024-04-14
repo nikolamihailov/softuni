@@ -1,22 +1,46 @@
-type City = {
-  name: string;
-  productName: string;
+type ProductInfo = {
+  cityFromName: string;
   productPrice: number;
 };
 
-function lowestPricesInCities(cityInfo: string[]): string {
-  const cities = new Map();
+function lowestPricesInCities(citiesInfo: string[]): string {
+  const lowestPricedProducts = new Map();
 
-  cityInfo.forEach((cityInfo) => {
+  citiesInfo.forEach((cityInfo) => {
     const [name, productName, productPrice] = cityInfo.split(" | ");
-    const city: City = {
-      name,
-      productName,
+
+    const productInfo: ProductInfo = {
+      cityFromName: name,
       productPrice: Number(productPrice),
     };
-    if (cities.has(productName) && cities.get(productName).productPrice > productPrice) {
-      cities.get(productName).product;
+
+    if (
+      lowestPricedProducts.has(productName) &&
+      lowestPricedProducts.get(productName).productPrice > Number(productPrice)
+    ) {
+      lowestPricedProducts.set(productName, productInfo);
+    }
+
+    if (!lowestPricedProducts.has(productName)) {
+      lowestPricedProducts.set(productName, productInfo);
     }
   });
-  return;
+
+  const results: string[] = [];
+  for (const [productName, { cityFromName, productPrice }] of lowestPricedProducts) {
+    results.push(`${productName} -> ${productPrice} (${cityFromName})`);
+  }
+  return results.join("\n");
 }
+
+console.log(
+  lowestPricesInCities([
+    "Sample Town | Sample Product | 1000",
+    "Sample Town | Orange | 2",
+    "Sample Town | Peach | 1",
+    "Sofia | Orange | 3",
+    "Sofia | Peach | 0.1",
+    "New York | Sample Product | 1000.1",
+    "New York | Burger | 10",
+  ])
+);
