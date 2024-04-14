@@ -21,20 +21,36 @@ class CarInfo implements Car {
 
   public set brand(brand: string) {
     if (brand.trim() !== "") {
-      this.brand = brand;
-    }
-  }
-  public set model(brand: string) {
-    if (brand.trim() !== "") {
-      this.brand = brand;
+      this._brand = brand;
     }
   }
 
   public get model(): string {
-    return this.model;
+    return this._model;
+  }
+
+  public set model(model: string) {
+    if (model.trim() !== "") {
+      this._model = model;
+    }
   }
 
   public get horsePower(): number {
     return this._horsePower;
   }
+
+  public set horsePower(horsePower: number) {
+    if (horsePower > 0) {
+      this._horsePower = horsePower;
+    }
+  }
+
+  printCarInfo(): void {
+    console.log(`The car is: ${this.brand} ${this.model} - ${this.horsePower} HP.`);
+  }
 }
+
+const input: string = "Chevrolet Impala 390";
+const [brand, model, horsePower] = input.split(" ");
+const carOne = new CarInfo(brand, model, Number(horsePower));
+carOne.printCarInfo();
