@@ -19,4 +19,4 @@ function printTowns(townsInfo: string[]): Town[] {
 
   return towns;
 }
-console.log(printTowwsn(["Sofia | 42.696552 | 23.32601", "Beijing | 39.913818 | 116.363625"]));
+console.log(printTowns(["Sofia | 42.696552 | 23.32601", "Beijing | 39.913818 | 116.363625"]));
