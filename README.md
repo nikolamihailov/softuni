@@ -4,7 +4,7 @@ This repository is for tracking my progress of the modules that I am attempting.
 
 
 ## Currently doing:
- - TypeScript
+ - TypeScript JS
 
 ## Passed courses:
  - JS Basics
