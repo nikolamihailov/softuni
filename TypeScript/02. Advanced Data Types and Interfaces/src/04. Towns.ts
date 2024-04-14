@@ -4,7 +4,7 @@ type Town = {
   longitude: string;
 };
 
-function printTowwsn(townsInfo: string[]): Town[] {
+function printTowns(townsInfo: string[]): Town[] {
   const towns: Town[] = [];
 
   townsInfo.forEach((townInfo) => {
