@@ -53,5 +53,5 @@ class Car implements CarInfo {
 
 const input: string = "Chevrolet Impala 390";
 const [brand, model, horsePower] = input.split(" ");
-const carOne = new CarInfo(brand, model, Number(horsePower));
+const carOne = new Car(brand, model, Number(horsePower));
 carOne.printCarInfo();
