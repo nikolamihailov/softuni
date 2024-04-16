@@ -1,11 +1,11 @@
-interface Car {
+interface CarInfo {
   brand: string;
   model: string;
   horsePower: number;
   printCarInfo: () => void;
 }
 
-class CarInfo implements Car {
+class Car implements CarInfo {
   private _brand: string;
   private _model: string;
   private _horsePower: number;
