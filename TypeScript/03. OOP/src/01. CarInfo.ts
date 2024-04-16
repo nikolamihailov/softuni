@@ -2,6 +2,7 @@ interface Car {
   brand: string;
   model: string;
   horsePower: number;
+  printCarInfo: () => void;
 }
 
 class CarInfo implements Car {
