@@ -1,6 +1,7 @@
 interface PersonInfo {
   name: string;
   age: number;
+  printInfo: () => void;
 }
 
 class Person implements PersonInfo {
