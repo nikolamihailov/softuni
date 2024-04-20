@@ -8,6 +8,8 @@ interface TrainerInfo {
   name: string;
   badges: number;
   pokemons: Pokemon[];
+  addPokemon: (pokemon: Pokemon) => void;
+  reduceHealthAndRemoveDead: () => void;
 }
 
 class Pokemon implements PokemonInfo {
@@ -32,6 +34,10 @@ class Pokemon implements PokemonInfo {
   get health(): number {
     return this._health;
   }
+
+  set health(health: number) {
+    this._health = health;
+  }
 }
 
 class Trainer implements TrainerInfo {
@@ -54,4 +60,10 @@ class Trainer implements TrainerInfo {
   get pokemons(): Pokemon[] {
     return this._pokemons;
   }
+
+  addPokemon(pokemon: Pokemon) {
+    this._pokemons.push(pokemon);
+  }
+
+  reduceHealthAndRemoveDead() {}
 }
