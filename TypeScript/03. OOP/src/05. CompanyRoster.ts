@@ -61,7 +61,7 @@ interface DepartmentInfo {
   employees: EmployeeInfo[];
   avgSalary: number;
   addEmployee: (employee: EmployeeInfo) => void;
-  printEmployeesInfo: () => void;
+  printEmployeesInfo: () => string;
 }
 
 class Department implements DepartmentInfo {
