@@ -10,6 +10,7 @@ interface TrainerInfo {
   pokemons: Pokemon[];
   addPokemon: (pokemon: Pokemon) => void;
   reduceHealthAndRemoveDead: () => void;
+  hasPokemonOfType: (type: string) => boolean;
 }
 
 class Pokemon implements PokemonInfo {
