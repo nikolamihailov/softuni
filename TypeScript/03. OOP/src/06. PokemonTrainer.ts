@@ -136,7 +136,7 @@ function pokemonGame(lines: string[]): string {
     .join("\n");
 }
 
-const results = pokemonGame([
+/* const results = pokemonGame([
   "Peter Charizard Fire 100",
   "George Squirtle Water 38",
   "Peter Pikachu Electricity 10",
@@ -145,4 +145,17 @@ const results = pokemonGame([
   "Electricity",
   "End",
 ]);
+console.log(results); */
+
+const results = pokemonGame([
+  "Sam Blastoise Water 18",
+  "Narry Pikachu Electricity 22",
+  "John Kadabra Psychic 90",
+  "Tournament",
+  "Fire",
+  "Electricity",
+  "Fire",
+  "End",
+]);
+
 console.log(results);
