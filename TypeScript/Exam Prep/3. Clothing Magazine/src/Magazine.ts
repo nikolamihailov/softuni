@@ -26,7 +26,7 @@ export class Magazine implements MagazineInfo {
     return this.clothes.length;
   }
 
-  sortClothesBySize(): Cloth[] {
+  getSortedClothes(): Cloth[] {
     return this.clothes.sort((a, b) => a.size - b.size);
   }
 
@@ -40,11 +40,12 @@ export class Magazine implements MagazineInfo {
       this.clothes.splice(idx, 1);
       return true;
     }
-    if (idx === -1) return false;
+    return false;
   }
 
   getSmallestCloth(): Cloth {
-    const cloth = this.sortClothesBySize()[0];
+    if (this.clothes.length === 0) return {} as Cloth;
+    const cloth = this.getSortedClothes()[0];
     return cloth;
   }
 
@@ -55,8 +56,8 @@ export class Magazine implements MagazineInfo {
 
   report(): string {
     const magazineType = `${this.type} magazine contains:\n`;
-    const clothes = this.sortClothesBySize();
-    const clothesInfo = clothes.map((cloth) => `${cloth.toString()}`);
-    return magazineType + clothes.join("\n");
+    const clothes = this.getSortedClothes();
+    const clothesInfo = clothes.map((cloth) => `${cloth.toString()}`).join("\n");
+    return magazineType + clothesInfo;
   }
 }
