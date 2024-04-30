@@ -2,10 +2,6 @@
 
 This repository is for tracking my progress of the modules that I am attempting. 
 
-
-## Currently doing:
- - TypeScript
-
 ## Passed courses:
  - JS Basics
  - JS Fundamentals
@@ -13,5 +9,6 @@ This repository is for tracking my progress of the modules that I am attempting.
  - JS Applications
  - JS Back-End
  - ReactJS
+ - TypeScript
    
 
