@@ -20,7 +20,7 @@ class Box<A> {
 
 /* const box = new Box<Number>();
 box.add(1);
-box.add(2);
+box.add(2);9
 box.add(3);
 console.log(box.count); */
 
