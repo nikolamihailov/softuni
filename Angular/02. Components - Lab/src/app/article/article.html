@@ -1,0 +1,18 @@
+<li>
+    <div id="title">{{ article.title }}</div>
+
+    @if(showReadMoreBtn){
+    <button (click)="readMore()">Read More</button>
+    }
+
+    @if(showHideBtn) {
+    <button (click)="hideDesc()">Hide Desc</button>
+    }
+    <button (click)="toggleImage()">{{ imageButtonTitle }}</button>
+
+    @if(articleDescLength > 0) {
+    <div class="desc">{{descToShow }}</div>
+    } @if(imageIsShown) {
+    <img src="{{ article.imageUrl }}" alt="article image" />
+    }
+</li>
