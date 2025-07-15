@@ -43,6 +43,6 @@ export class Article {
 
   toggleImage() {
     this.imageIsShown = !this.imageIsShown;
-    this.imageButtonTitle = this.imageIsShown ? 'Show Image' : 'Hide Image';
+    this.imageButtonTitle = this.imageButtonTitle === 'Show Image' ? 'Hide Image' : 'Show Image';
   }
 }
