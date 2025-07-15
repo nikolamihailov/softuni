@@ -1,1 +1,36 @@
 <h3>Hello from {{name}}</h3>
+
+<img [src]="logo" />
+
+<h4>Types of greetings:</h4>
+<ul>
+    @for (greeting of greetings; track greeting; let idx = $index){
+    <li>{{idx+1}}. {{greeting}}</li>
+    } @empty {
+    <h3>No greetings</h3>
+    }
+</ul>
+<h4>Our users:</h4>
+<div>
+    @for (user of users; track user.id) {
+    <p style="cursor: pointer" (click)="onGreet(user.name)">Greetings from {{user.age}} years old {{user.name}} !!!
+        (Click me for suprise)</p>
+    @if (user.age > 18 && isOldEnough){
+    <strong>- He drinks beer</strong>
+    } @else {
+    <strong>- He is baby</strong>
+    }
+    <hr>
+    } @empty {
+    <h3>No greetings</h3>
+    }
+</div>
+
+<h4>Received Greetings:</h4>
+<div>
+    @for (receivGreet of receivedGreetings; track receivGreet){
+    <p style="color: brown">{{receivGreet}}</p>
+    } @empty {
+    <p>Nobody has said hi! :(</p>
+    }
+</div>
