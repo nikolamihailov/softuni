@@ -10,5 +10,3 @@ This repository is for tracking my progress of the modules that I am attempting.
  - JS Back-End
  - ReactJS
  - TypeScript
-   
-
