@@ -1,0 +1,11 @@
+<ul>
+    @for (product of products; track product.id){
+    <li>
+        <h1>{{product.name}}</h1>
+        <span>{{product.price}}</span>
+        <h3>{{product.category}}</h3>
+    </li>
+    }
+</ul>
+
+<button (click)="addNewProduct()">Add Product +</button>
