@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { Product } from '../models/product.model';
 import { Subscription } from 'rxjs';
+import { Photo } from '../models/photo.model';
 
 @Component({
   selector: 'app-products',
@@ -11,14 +12,24 @@ import { Subscription } from 'rxjs';
 })
 export class Products implements OnInit, OnDestroy {
   products: Product[] = [];
-  subscription!: Subscription;
+  productsPhotos: Photo[] = [];
+  subscriptions: Subscription[] = [];
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.subscription = this.productsService.getProducts().subscribe((products: Product[]) => {
-      this.products = products;
-    });
+    this.subscriptions.push(
+      this.productsService.getProducts().subscribe((products: Product[]) => {
+        this.products = products;
+      }),
+    );
+
+    this.subscriptions.push(
+      this.productsService.getProductsPhotos().subscribe((photos: Photo[]) => {
+        console.log(photos);
+        this.productsPhotos = photos.slice(0, 10);
+      }),
+    );
   }
 
   addNewProduct() {
@@ -32,6 +43,8 @@ export class Products implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscriptions.forEach((s) => {
+      s.unsubscribe();
+    });
   }
 }

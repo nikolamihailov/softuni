@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../models/product.model';
 import { Observable, of } from 'rxjs';
+import { Photo } from '../models/photo.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +24,19 @@ export class ProductsService {
     },
   ];
 
+  constructor(private httpClient: HttpClient) {}
+
   getProducts(): Observable<Product[]> {
     return of(this.products);
   }
 
   addProduct(product: Product): void {
     this.products.push(product);
+  }
+
+  getProductsPhotos(): Observable<Photo[]> {
+    const URL = 'https://jsonplaceholder.typicode.com/photos';
+
+    return this.httpClient.get<Photo[]>(URL);
   }
 }
